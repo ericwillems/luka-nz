@@ -1,7 +1,7 @@
-baseURL = "https://example.com/"
-title = "Portfolio"
-languageCode = "en-us"
-theme = "PaperMod"
+baseURL: "https://example.com/"
+title: "Portfolio"
+languageCode: "en-us"
+theme: "PaperMod"
 
 # Output formats
 outputs:
@@ -10,23 +10,23 @@ outputs:
     - JSON
 
 # Pagination
-paginate = 10
+paginate: 10
 
 # Markup
 markup:
   highlight:
-    anchorLineNos = false
-    codeFences = true
-    guessSyntax = false
-    hl_Lines = ""
-    hl_inline = false
-    lineAnchors = ""
-    lineNos = false
-    lineNumbersInTable = false
-    noClasses = true
-    noHl = false
-    style = "github-dark"
-    tabWidth = 4
+    anchorLineNos: false
+    codeFences: true
+    guessSyntax: false
+    hl_Lines: ""
+    hl_inline: false
+    lineAnchors: ""
+    lineNos: false
+    lineNumbersInTable: false
+    noClasses: true
+    noHl: false
+    style: "github-dark"
+    tabWidth: 4
 
 # Taxonomies
 taxonomies:
