@@ -1,9 +1,13 @@
 ---
-title = "Getting Started with Hugo"
-date = 2024-01-10T08:00:00Z
-draft = false
-categories = ["Tutorial"]
-tags = ["Hugo", "Static Sites", "Web Development"]
+title: "Getting Started with Hugo"
+date: 2024-01-10T08:00:00Z
+draft: false
+categories:
+  - "Tutorial"
+tags:
+  - "Hugo"
+  - "Static Sites"
+  - "Web Development"
 ---
 
 Hugo is a powerful static site generator that makes it easy to build fast websites.

@@ -34,7 +34,7 @@ luka-nz/
 │   └── images/             # Images and graphics
 ├── themes/
 │   └── PaperMod/          # Hugo theme
-├── hugo.toml              # Hugo configuration
+├── hugo.yaml              # Hugo configuration
 ├── pagescms.config.json   # PagesCMS configuration
 ├── package.json           # Project metadata and scripts
 ├── .env.example           # Environment variables template
@@ -198,9 +198,9 @@ About section.
 
 ### Hugo Configuration
 
-Edit `hugo.toml` to customize:
+Edit `hugo.yaml` to customize:
 
-```toml
+```yaml
 baseURL = "https://yourdomain.com/"
 title = "Your Portfolio"
 theme = "PaperMod"
@@ -264,9 +264,9 @@ Edit `pagescms.config.json` to:
 
 ### Front Matter Format
 
-Posts and Projects use TOML front matter:
+Posts and Projects use YAML front matter:
 
-```toml
+```yaml
 ---
 title = "Post Title"
 date = 2024-01-10T08:00:00Z
@@ -328,7 +328,7 @@ Install Hugo: https://gohugo.io/installation/
 
 ```bash
 # Ensure theme is correctly referenced
-cat hugo.toml | grep theme
+cat hugo.yaml | grep theme
 
 # Verify theme exists
 ls -la themes/PaperMod

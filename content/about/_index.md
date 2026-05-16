@@ -1,6 +1,6 @@
 ---
-title = "About Me"
-draft = false
+title: "About Me"
+draft: false
 ---
 
 Welcome to my about page. This is where you can learn more about me, my background, and my interests.
