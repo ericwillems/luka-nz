@@ -46,13 +46,24 @@ content:
             summary: "{name} ({index})"
         fields:
           - { name: name, label: Label, type: str }
-          - { name: url, label: URL, type: string }
-          - { name: weight, label: Order, type: number }
+          - name: url
+            type: reference
+            options:
+              collection: projects
+              value: "{path}"
+              label: "{label}"
           - name: children
             label: Dropdown Items
             type: object
-            list: true
+            list: 
+              collapsible:
+                collapsed: true
+                summary: "{name} ({index})"
             fields:
               - { name: name, label: Label, type: str }
-              - { name: url, label: URL, type: string }
-              - { name: weight, label: Order, type: number }
+              - name: url
+                type: reference
+                options:
+                  collection: projects
+                  value: "{path}"
+                  label: "{label}"

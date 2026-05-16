@@ -1,7 +1,5 @@
 items:
   - name: Home
     url: /
-    weight: 1
   - name: Projects
     url: /projects
-    weight: 2
