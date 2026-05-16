@@ -2,6 +2,7 @@ baseURL: "https://example.com/"
 title: "Portfolio"
 languageCode: "en-us"
 theme: "PaperMod"
+metaDataFormat: "yaml"
 
 # Output formats
 outputs:

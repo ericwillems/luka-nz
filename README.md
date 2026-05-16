@@ -267,13 +267,13 @@ Edit `pagescms.config.json` to:
 Posts and Projects use TOML front matter:
 
 ```toml
-+++
+---
 title = "Post Title"
 date = 2024-01-10T08:00:00Z
 categories = ["Category"]
 tags = ["tag1", "tag2"]
 draft = false
-+++
+---
 ```
 
 ### Draft vs Published
