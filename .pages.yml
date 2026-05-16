@@ -50,8 +50,6 @@ content:
             type: reference
             options:
               collection: projects
-              value: "{path}"
-              label: "{label}"
           - name: children
             label: Dropdown Items
             type: object
