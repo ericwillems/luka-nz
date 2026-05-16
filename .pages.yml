@@ -32,3 +32,24 @@ content:
       - { name: title, label: Title, type: string, required: true }
       - { name: draft, label: Draft, type: boolean }
       - { name: body, label: Body, type: rich-text }
+  - name: menu
+    label: Main Menu
+    type: file
+    path: data/menu/main.yaml
+    fields:
+      - name: items
+        label: Menu Items
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Label, type: str }
+          - { name: url, label: URL, type: string }
+          - { name: weight, label: Order, type: number }
+          - name: children
+            label: Dropdown Items
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Label, type: str }
+              - { name: url, label: URL, type: string }
+              - { name: weight, label: Order, type: number }
