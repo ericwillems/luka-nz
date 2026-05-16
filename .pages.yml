@@ -63,6 +63,4 @@ content:
               - name: url
                 type: reference
                 options:
-                  collection: projects
-                  value: "{path}"
-                  label: "{label}"
+                  collection: pages
