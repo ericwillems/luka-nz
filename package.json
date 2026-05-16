@@ -1,0 +1,30 @@
+{
+  "name": "luka-nz",
+  "version": "1.0.0",
+  "description": "Portfolio site built with Hugo and PagesCMS",
+  "type": "module",
+  "scripts": {
+    "dev": "hugo server -D",
+    "build": "hugo",
+    "build:prod": "hugo --minify",
+    "clean": "rm -rf public/"
+  },
+  "keywords": [
+    "hugo",
+    "pagescms",
+    "portfolio",
+    "static-site",
+    "jamstack"
+  ],
+  "author": "eric",
+  "license": "MIT",
+  "devDependencies": {},
+  "engines": {
+    "hugo": ">= 0.135.0",
+    "node": ">= 18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/luka-nz"
+  }
+}
