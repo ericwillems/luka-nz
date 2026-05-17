@@ -5,9 +5,7 @@ draft: false
 categories:
   - "Tutorial"
 tags:
-  - "Hugo"
-  - "Static Sites"
-  - "Web Development"
+  - Advocacy
 ---
 
 Hugo is a powerful static site generator that makes it easy to build fast websites.

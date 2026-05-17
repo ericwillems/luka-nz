@@ -13,7 +13,7 @@ content:
         label: Cover Image
         type: object
         fields:
-          - { name: image, label: Image, type: image }
+          - { name: image, label: Image, type: image, list: true }
       - { name: draft, label: Draft, type: boolean }
       - { name: tags, label: Tags, type: string, list: true }
       - { name: body, label: Body, type: rich-text }
