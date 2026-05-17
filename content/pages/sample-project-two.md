@@ -1,15 +1,8 @@
 ---
-title: "Sample Project Two"
-description: "Backend API development example"
-image: "images/project-two.jpg"
-link: "https://github.com"
-technologies: 
-  - "Node.js"
-  - "Express"
-  - "PostgreSQL"
+title: Sample Page Two
+description: Backend API development example
 draft: false
 ---
-
 Another example project in your portfolio.
 
 ## Key Features
@@ -17,3 +10,4 @@ Another example project in your portfolio.
 - RESTful API design
 - Database optimization
 - Scalable architecture
+
