@@ -9,6 +9,7 @@ content:
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: description, label: Description, type: string }
+      - { name: cover, label: Cover Image, type: image }
       - { name: draft, label: Draft, type: boolean }
       - { name: tags, label: Tags, type: string, list: true }
       - { name: body, label: Body, type: rich-text }
@@ -21,6 +22,7 @@ content:
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: date, label: Date, type: date }
+      - { name: images, label: Images, type: image, list: true }
       - { name: draft, label: Draft, type: boolean }
       - { name: tags, label: Tags, type: string, list: true }
       - { name: body, label: Body, type: rich-text }
