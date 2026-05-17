@@ -1,5 +1,17 @@
 media: public/assets/img
 content:
+  - name: pages
+    label: Pages
+    type: collection
+    path: content/pages
+    view:
+      fields: [ title, draft, date ]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Description, type: string }
+      - { name: draft, label: Draft, type: boolean }
+      - { name: tags, label: Tags, type: string, list: true }
+      - { name: body, label: Body, type: rich-text }
   - name: posts
     label: Posts
     type: collection
@@ -9,18 +21,6 @@ content:
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: date, label: Date, type: date }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: tags, label: Tags, type: string, list: true }
-      - { name: body, label: Body, type: rich-text }
-  - name: projects
-    label: Projects
-    type: collection
-    path: content/projects
-    view:
-      fields: [ title, draft, date ]
-    fields:
-      - { name: title, label: Title, type: string, required: true }
-      - { name: description, label: Description, type: string }
       - { name: draft, label: Draft, type: boolean }
       - { name: tags, label: Tags, type: string, list: true }
       - { name: body, label: Body, type: rich-text }
@@ -45,11 +45,11 @@ content:
             collapsed: true
             summary: "{name} ({index})"
         fields:
-          - { name: name, label: Label, type: str }
+          - { name: name, label: Label, type: string }
           - name: url
             type: reference
             options:
-              collection: projects
+              collection: pages
               value: "{path}"
           - name: children
             label: Dropdown Items
@@ -59,10 +59,10 @@ content:
                 collapsed: true
                 summary: "{name} ({index})"
             fields:
-              - { name: name, label: Label, type: str }
+              - { name: name, label: Label, type: string }
               - name: url
                 type: reference
                 options:
-                  collection: projects
+                  collection: pages
                   value: "{path}"
                   label: "{label}"
