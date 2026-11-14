@@ -1,79 +1,77 @@
-media: public/assets/img
+media: assets/images
 content:
-  - name: pages
-    label: Pages
+  - name: topics
+    label: Topics
     type: collection
-    path: content/pages
+    path: content/topics
     view:
-      fields: [ title, draft, date ]
+      fields: [ title, draft ]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: url, label: URL, type: string }
+      - { name: description, label: Description, type: string }
+      - name: cover
+        label: Banner Image
+        type: object
+        fields:
+          - { name: image, label: Image, type: image }
+          - { name: alt, label: Alt Text, type: string }
+          - { name: caption, label: Caption, type: string }
+      - name: subtopics
+        label: Related Topics
+        type: reference
+        list: true
+        options:
+          collection: topics
+          value: "{path}"
+          label: "{title}"
+      - name: menu
+        label: Main Menu
+        type: object
+        fields:
+          - name: main
+            type: object
+            fields:
+              - { name: name, label: Menu Label, type: string }
+              - { name: weight, label: Menu Order, type: number }
+      - { name: draft, label: Draft, type: boolean }
+      - { name: body, label: Topic Introduction and Content, type: rich-text }
+  - name: posts
+    label: Topic Posts
+    type: collection
+    path: content/posts
+    view:
+      fields: [ title, topic, date, draft ]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: topic, label: Topic, type: reference, required: true, options: { collection: topics, value: "{path}", label: "{title}" } }
+      - { name: date, label: Date, type: date }
+      - { name: draft, label: Draft, type: boolean }
+      - name: blocks
+        label: Post Content (in order)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "Content block ({index})"
+        fields:
+          - { name: text, label: Text (optional), type: rich-text }
+          - { name: image, label: Image (optional), type: image }
+          - { name: alt, label: Image Alt Text, type: string }
+          - { name: caption, label: Image Caption, type: string }
+          - { name: description, label: Image Description, type: string }
+  - name: home
+    label: Home Page
+    type: file
+    path: content/_index.md
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: description, label: Description, type: string }
       - name: cover
-        label: Cover Image
+        label: Banner Image
         type: object
         fields:
           - { name: image, label: Image, type: image }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: tags, label: Tags, type: string, list: true }
-      - { name: body, label: Body, type: rich-text }
-  - name: posts
-    label: Posts
-    type: collection
-    path: content/posts
-    view:
-      fields: [ title, draft, date ]
-    fields:
-      - { name: title, label: Title, type: string, required: true }
-      - { name: date, label: Date, type: date }
-      - name: images
-        label: Images
-        type: object
-        list: true
-        fields:
-          - { name: image, label: Image, type: image }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: tags, label: Tags, type: string, list: true }
-      - { name: body, label: Body, type: rich-text }
-  - name: about
-    label: About page
-    type: file
-    path: content/about/_index.md
-    fields:
-      - { name: title, label: Title, type: string, required: true }
+          - { name: alt, label: Alt Text, type: string }
       - { name: draft, label: Draft, type: boolean }
       - { name: body, label: Body, type: rich-text }
-  - name: menu
-    label: Main Menu
-    type: file
-    path: data/menu/main.yaml
-    fields:
-      - name: items
-        label: Menu Items
-        type: object
-        list: 
-          collapsible:
-            collapsed: true
-            summary: "{name} ({index})"
-        fields:
-          - { name: name, label: Label, type: string }
-          - name: url
-            type: reference
-            options:
-              collection: pages
-              value: "{path}"
-          - name: children
-            label: Dropdown Items
-            type: object
-            list: 
-              collapsible:
-                collapsed: true
-                summary: "{name} ({index})"
-            fields:
-              - { name: name, label: Label, type: string }
-              - name: url
-                type: reference
-                options:
-                  collection: pages
-                  value: "{path}"
-                  label: "{label}"

@@ -1,0 +1,25 @@
+{{- $topicSlug := .File.BaseFileName -}}
+{{- $posts := slice -}}
+{{- range where site.RegularPages "Section" "posts" -}}
+  {{- $post := . -}}
+  {{- with $post.Params.topic -}}
+    {{- $postTopicSlug := partial "topic-ref.html" . -}}
+    {{- if eq $postTopicSlug $topicSlug -}}
+      {{- $posts = $posts | append $post -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $posts }}
+<section class="topic-posts" aria-label="Posts">
+  <h2>Posts</h2>
+  {{- range sort $posts "Date" "desc" }}
+  <article class="topic-post image-group-container">
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    {{- with .Date }}
+    <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "January 2, 2006" }}</time>
+    {{- end }}
+    {{- partial "post-blocks.html" . }}
+  </article>
+  {{- end }}
+</section>
+{{- end }}

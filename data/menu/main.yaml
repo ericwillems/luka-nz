@@ -1,8 +1,0 @@
-items:
-  - name: Home
-    url: /
-  - name: Projects
-    url: /projects
-    children:
-      - name: Project One
-      - name: Project Two

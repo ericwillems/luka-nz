@@ -1,0 +1,12 @@
+{{- $source := printf "%v" . -}}
+{{- if or (strings.HasPrefix $source "https://") (strings.HasPrefix $source "http://") -}}
+  {{- $source -}}
+{{- else -}}
+  {{- $path := strings.TrimPrefix "/" $source -}}
+  {{- $path = strings.TrimPrefix "assets/" $path -}}
+  {{- with resources.Get $path -}}
+    {{- .RelPermalink -}}
+  {{- else -}}
+    {{- $source | relURL -}}
+  {{- end -}}
+{{- end -}}

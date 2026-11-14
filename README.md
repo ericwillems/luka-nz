@@ -1,6 +1,6 @@
-# Hugo + PagesCMS Portfolio Site
+# Luka.nz — Hugo + PagesCMS
 
-A modern portfolio and blog site built with Hugo static site generator and PagesCMS for content management.
+A Hugo site for Luka.nz, with topic pages and topic-linked posts managed through PagesCMS.
 
 ## Overview
 
@@ -12,7 +12,7 @@ This project combines:
 
 ## Features
 
-- 📝 Multiple content types: Projects, Posts, Pages, About
+- 📝 Topic pages with persistent introductions and topic-linked posts
 - 🎨 Responsive design powered by PaperMod theme
 - ⚡ Fast static site generation
 - 📋 Easy content management through PagesCMS
@@ -23,21 +23,18 @@ This project combines:
 
 ```
 luka-nz/
-├── content/                 # Site content (managed by PagesCMS)
-│   ├── projects/           # Portfolio projects
-│   ├── posts/              # Blog posts
-│   ├── pages/              # Static pages
-│   └── about/              # About section
-├── layouts/                # Custom Hugo templates (optional)
-├── static/                 # Static assets
-│   ├── uploads/            # Media uploads
-│   └── images/             # Images and graphics
+├── content/
+│   ├── _index.md           # Home page
+│   ├── topics/             # Topic landing pages
+│   └── posts/              # Posts assigned to topics
+├── assets/images/          # Images and PagesCMS uploads
+├── layouts/                # Topic/post templates and image layouts
+├── static/js/              # Image grouping behavior
+├── .pages.yml              # PagesCMS collections and fields
 ├── themes/
 │   └── PaperMod/          # Hugo theme
 ├── hugo.yaml              # Hugo configuration
-├── pagescms.config.json   # PagesCMS configuration
 ├── package.json           # Project metadata and scripts
-├── .env.example           # Environment variables template
 └── .gitignore             # Git ignore patterns
 ```
 
@@ -69,13 +66,7 @@ hugo version
 1. Go to https://pagescms.org
 2. Create a new project and connect your GitHub repository
 3. Follow PagesCMS authentication flow
-4. Configure GitHub OAuth if required
-5. Copy environment variables to `.env` file:
-
-```bash
-cp .env.example .env
-# Edit .env with your credentials
-```
+4. The `.pages.yml` file in the repository root defines the Topics, Topic Posts, and Home Page collections.
 
 ## Content Management
 
@@ -84,20 +75,20 @@ cp .env.example .env
 Edit markdown files directly:
 
 ```bash
-# Create a new post
-nano content/posts/my-post.md
+# Create a topic landing page
+nano content/topics/my-topic.md
 
-# Create a new project
-nano content/projects/my-project.md
+# Create a post assigned to a topic
+nano content/posts/my-post.md
 ```
 
 ### PagesCMS UI
 
-1. Log in to PagesCMS dashboard
-2. Navigate to Collections (Projects, Posts, Pages, About)
-3. Click "New" to create content
-4. Fill in fields and publish
-5. Changes automatically commit to Git
+1. Log in to the PagesCMS dashboard.
+2. Use **Topics** to edit a topic title, introduction, banner, related topics, or menu placement.
+3. Use **Topic Posts** to create a post and select its topic.
+4. Add ordered text and image blocks. An image may have a caption or description; consecutive images without one display in a compact horizontal gallery, while captioned images display in columns.
+5. Publish the change; PagesCMS commits it to Git.
 
 ## Development
 
@@ -140,59 +131,17 @@ rm -rf public/
 
 ## Content Types
 
-### Projects
+### Topics
 
-Portfolio entries with technology stack and links.
+Topic landing pages live in `content/topics/`. Each page keeps its introduction and banner above posts assigned to that topic. Related topics are linked from the landing page. Hidden topics are drafts until they contain publishable content.
 
-**File location**: `content/projects/`
+### Topic Posts
 
-**Fields**:
-- Title (required)
-- Description
-- Project Image
-- Project Link
-- Technologies (list)
-- Draft status
+Posts live in `content/posts/` and use a `topic` reference to associate them with a topic page. Use ordered content blocks to interleave text and images. Image blocks support alt text, captions, and descriptions.
 
-**Example**: `content/projects/sample-project-one.md`
+### Home
 
-### Posts
-
-Blog articles with categories and tags.
-
-**File location**: `content/posts/`
-
-**Fields**:
-- Title (required)
-- Publish Date
-- Categories (list)
-- Tags (list)
-- Draft status
-- Content (markdown)
-
-**Example**: `content/posts/getting-started-with-hugo.md`
-
-### Pages
-
-Static pages (home, etc.)
-
-**File location**: `content/pages/`
-
-**Fields**:
-- Title (required)
-- Draft status
-- Content (markdown)
-
-### About
-
-About section.
-
-**File location**: `content/about/`
-
-**Fields**:
-- Title (required)
-- Draft status
-- Content (markdown)
+The homepage is `content/_index.md` and is editable as the **Home Page** file in PagesCMS.
 
 ## Configuration
 
@@ -201,27 +150,27 @@ About section.
 Edit `hugo.yaml` to customize:
 
 ```yaml
-baseURL = "https://yourdomain.com/"
-title = "Your Portfolio"
-theme = "PaperMod"
+baseURL: "https://yourdomain.com/"
+title: "Your Site"
+theme: "PaperMod"
 
-# Add menu items
 menu:
   main:
     - name: Home
       url: /
-    - name: Projects
-      url: /projects/
-    # Add more menu items
+      weight: 1
+    - name: YouTube
+      url: https://www.youtube.com/c/LukaWillems
+      weight: 9
 ```
 
 ### PagesCMS Configuration
 
-Edit `pagescms.config.json` to:
+Edit `.pages.yml` to:
 - Add/modify content collections
 - Change field types
 - Configure media settings
-- Adjust upload directories
+- Adjust the upload directory
 
 ## Deployment
 
@@ -264,22 +213,28 @@ Edit `pagescms.config.json` to:
 
 ### Front Matter Format
 
-Posts and Projects use YAML front matter:
+Topic posts use YAML front matter and ordered content blocks:
 
 ```yaml
 ---
-title = "Post Title"
-date = 2024-01-10T08:00:00Z
-categories = ["Category"]
-tags = ["tag1", "tag2"]
-draft = false
+title: "Post title"
+topic: topics/sport.md
+date: 2026-01-10
+draft: false
+blocks:
+  - text: "Text that appears before the image."
+  - image: images/sport/example.jpg
+    alt: "Description of the image"
+    caption: "Optional caption"
 ---
 ```
 
+Use text blocks for prose and image blocks for photos. Captions and descriptions are optional; adjacent images without them display in a compact gallery, while captioned images display in columns.
+
 ### Draft vs Published
 
-- `draft = true` - Content hidden from production (visible with `-D` flag in dev)
-- `draft = false` - Content published and visible
+- `draft: true` - Content hidden from production (visible with `-D` flag in dev)
+- `draft: false` - Content published and visible
 
 ## Updating Theme
 
@@ -312,7 +267,7 @@ layouts/
 
 ### Custom CSS
 
-Add styles to `static/css/` and reference in layouts.
+Add styles to `assets/css/extended/` and reference them in layouts.
 
 ### Static Assets
 
@@ -336,29 +291,15 @@ ls -la themes/PaperMod
 
 ### Content not appearing
 
-- Check draft status: `draft = false`
+- Check draft status: `draft: false`
 - Verify file format: Must be `.md` in correct folder
 - Check front matter syntax (TOML or YAML)
 
 ### PagesCMS not syncing
 
-- Verify GitHub OAuth credentials in `.env`
-- Check repository permissions
-- Ensure content folders exist in Git
-
-## Environment Variables
-
-Required for PagesCMS integration:
-
-```
-GITHUB_CLIENT_ID         - GitHub OAuth app client ID
-GITHUB_CLIENT_SECRET     - GitHub OAuth app client secret
-GITHUB_REPO_OWNER        - GitHub username
-GITHUB_REPO_NAME         - Repository name
-PAGES_CMS_BRANCH         - Git branch to manage (default: main)
-```
-
-Get OAuth credentials at: https://github.com/settings/developers
+- Check PagesCMS authorization and repository permissions.
+- Confirm collection paths and fields in `.pages.yml`.
+- Ensure content folders exist in Git.
 
 ## Resources
 

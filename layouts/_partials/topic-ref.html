@@ -1,0 +1,4 @@
+{{- $reference := printf "%v" . -}}
+{{- $reference = strings.TrimSuffix "/" $reference -}}
+{{- $reference = strings.TrimSuffix ".md" $reference -}}
+{{- path.Base $reference -}}

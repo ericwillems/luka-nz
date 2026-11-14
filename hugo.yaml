@@ -1,6 +1,6 @@
 baseURL: "https://ericwillems.com/luka-nz/"
-title: "Portfolio"
-languageCode: "en-us"
+title: "Luka.nz"
+locale: "en-NZ"
 theme: "PaperMod"
 metaDataFormat: "yaml"
 
@@ -40,12 +40,10 @@ menu:
     - name: Home
       url: /
       weight: 1
-    - name: Pages
-      url: /pages/
-      weight: 2
-    - name: Posts
-      url: /posts/
-      weight: 3
-    - name: About
-      url: /about/
-      weight: 4
+    - name: YouTube
+      url: https://www.youtube.com/c/LukaWillems
+      weight: 9
+
+params:
+  mainSections:
+    - posts
