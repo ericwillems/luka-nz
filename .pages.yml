@@ -8,6 +8,8 @@ content:
       fields: [ title, draft ]
     fields:
       - { name: title, label: Title, type: string, required: true }
+      - { name: draft, label: Draft, type: boolean }
+      - { name: body, label: Topic Introduction and Content, type: rich-text }
       - { name: url, label: URL, type: string }
       - { name: description, label: Description, type: string }
       - name: cover
@@ -25,8 +27,6 @@ content:
           collection: topics
           value: "{path}"
           label: "{title}"
-      - { name: draft, label: Draft, type: boolean }
-      - { name: body, label: Topic Introduction and Content, type: rich-text }
       - name: menu
         label: Main Menu
         type: object
@@ -66,6 +66,8 @@ content:
     path: content/_index.md
     fields:
       - { name: title, label: Title, type: string, required: true }
+      - { name: draft, label: Draft, type: boolean }
+      - { name: body, label: Body, type: rich-text }
       - { name: description, label: Description, type: string }
       - name: cover
         label: Banner Image
@@ -73,5 +75,4 @@ content:
         fields:
           - { name: image, label: Image, type: image }
           - { name: alt, label: Alt Text, type: string }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: body, label: Body, type: rich-text }
+
