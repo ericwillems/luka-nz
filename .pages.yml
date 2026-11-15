@@ -25,6 +25,8 @@ content:
           collection: topics
           value: "{path}"
           label: "{title}"
+      - { name: draft, label: Draft, type: boolean }
+      - { name: body, label: Topic Introduction and Content, type: rich-text }
       - name: menu
         label: Main Menu
         type: object
@@ -34,8 +36,6 @@ content:
             fields:
               - { name: name, label: Menu Label, type: string }
               - { name: weight, label: Menu Order, type: number }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: body, label: Topic Introduction and Content, type: rich-text }
   - name: posts
     label: Topic Posts
     type: collection
