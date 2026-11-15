@@ -1,9 +1,6 @@
 ---
 title: "DiscoverNZ"
+parent: content/topics/travel.md
 url: "/discovernz/"
 draft: true
-menu:
-  main:
-    name: DiscoverNZ
-    weight: 10
 ---

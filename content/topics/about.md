@@ -1,16 +1,8 @@
 ---
-title: "About Me"
+title: "About Luka"
 url: "/about/"
 draft: false
-subtopics:
-  - topics/qualifications.md
-  - topics/work-experience.md
-  - topics/awards.md
-  - topics/passions.md
-menu:
-  main:
-    name: About
-    weight: 2
+parent: content/topics/interests.md
 ---
 Check out my [YouTube channel](https://www.youtube.com/channel/UCV7F4ndiN-o1dMO_dfb-QfQ/) and subscribe!
 

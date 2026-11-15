@@ -1,12 +1,27 @@
 {{- $source := printf "%v" . -}}
-{{- if or (strings.HasPrefix $source "https://") (strings.HasPrefix $source "http://") -}}
+{{- $u := urls.Parse $source -}}
+{{- $blobImage := strings.Contains $u.Path "/blob/main/images/" -}}
+{{- if and $u.IsAbs (not $blobImage) -}}
   {{- $source -}}
 {{- else -}}
-  {{- $path := strings.TrimPrefix "/" $source -}}
-  {{- $path = strings.TrimPrefix "assets/" $path -}}
+  {{- $path := partial "image-path.html" $source -}}
   {{- with resources.Get $path -}}
-    {{- .RelPermalink -}}
+    {{- $resolved := .RelPermalink -}}
+    {{- with $u.RawQuery -}}
+      {{- $resolved = printf "%s?%s" $resolved . -}}
+    {{- end -}}
+    {{- with $u.Fragment -}}
+      {{- $resolved = printf "%s#%s" $resolved . -}}
+    {{- end -}}
+    {{- $resolved -}}
   {{- else -}}
-    {{- $source | relURL -}}
+    {{- $resolved := $path | relURL -}}
+    {{- with $u.RawQuery -}}
+      {{- $resolved = printf "%s?%s" $resolved . -}}
+    {{- end -}}
+    {{- with $u.Fragment -}}
+      {{- $resolved = printf "%s#%s" $resolved . -}}
+    {{- end -}}
+    {{- $resolved -}}
   {{- end -}}
 {{- end -}}

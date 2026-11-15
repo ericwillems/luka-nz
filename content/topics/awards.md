@@ -1,6 +1,7 @@
 ---
 title: Awards
 url: /awards/
+parent: content/topics/sport.md
 description: >-
   National Acheivement Award Nov 2024 - Government House
 
@@ -9,7 +10,7 @@ description: >-
   House in Wellington this Nov 14th. The award will be presented by the Rt
   Hon.Dame Cindy
 cover:
-  image: /assets/images/awards/awards-01.jpg
+  image: images/awards/awards-01.jpg
 draft: false
 ---
 ## National Acheivement Award Nov 2024 - Government House

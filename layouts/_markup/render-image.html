@@ -1,7 +1,8 @@
 {{- $u := urls.Parse .Destination -}}
 {{- $src := $u.String -}}
-{{- if not $u.IsAbs -}}
-  {{- $path := strings.TrimPrefix "./" $u.Path }}
+{{- $blobImage := strings.Contains $u.Path "/blob/main/images/" -}}
+{{- if or (not $u.IsAbs) $blobImage -}}
+  {{- $path := partial "image-path.html" .Destination -}}
   {{- with or (.PageInner.Resources.Get $path) (resources.Get $path) -}}
     {{- $src = .RelPermalink -}}
     {{- with $u.RawQuery -}}
@@ -11,13 +12,19 @@
       {{- $src = printf "%s#%s" $src . -}}
     {{- end -}}
   {{- else -}}
-    {{- $src = $u.Path | relURL -}}
+    {{- $src = $path | relURL -}}
+    {{- with $u.RawQuery -}}
+      {{- $src = printf "%s?%s" $src . -}}
+    {{- end -}}
+    {{- with $u.Fragment -}}
+      {{- $src = printf "%s#%s" $src . -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
-{{- $attributes := merge .Attributes (dict "alt" .Text "src" $src "title" (.Title | transform.HTMLEscape) "class" "content-image" "loading" "lazy") -}}
+{{- $attributes := merge .Attributes (dict "alt" "" "src" $src "title" (.Title | transform.HTMLEscape) "class" "content-image" "loading" "lazy") -}}
 <img
   {{- range $k, $v := $attributes -}}
-    {{- if $v -}}
+    {{- if or $v (eq $k "alt") -}}
       {{- printf " %s=%q" $k $v | safeHTMLAttr -}}
     {{- end -}}
   {{- end -}}>

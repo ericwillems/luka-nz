@@ -12,7 +12,7 @@ This project combines:
 
 ## Features
 
-- 📝 Topic pages with persistent introductions and topic-linked posts
+- 📝 Five main topics with one-level sub-topics and topic posts
 - 🎨 Responsive design powered by PaperMod theme
 - ⚡ Fast static site generation
 - 📋 Easy content management through PagesCMS
@@ -85,9 +85,9 @@ nano content/posts/my-post.md
 ### PagesCMS UI
 
 1. Log in to the PagesCMS dashboard.
-2. Use **Topics** to edit a topic title, introduction, banner, related topics, or menu placement.
-3. Use **Topic Posts** to create a post and select its topic.
-4. Add ordered text and image blocks. An image may have a caption or description; consecutive images without one display in a compact horizontal gallery, while captioned images display in columns.
+2. Use **Topics** to edit a topic or choose a top-level parent for a sub-topic. Leave Parent Topic blank for one of the five top-level topics: Sport, Inclusion, Interests, Media, or Travel. Topics may only be one level deep.
+3. Use **Topic Posts** to add content to a topic. A post title is optional.
+4. Add ordered text and image blocks. Use one caption field for an image's caption and description; consecutive images without a caption display in a compact horizontal gallery.
 5. Publish the change; PagesCMS commits it to Git.
 
 ## Development
@@ -103,7 +103,7 @@ hugo server -D
 # Visit http://localhost:1313
 ```
 
-The `-D` flag shows draft posts. Remove it in production builds.
+The `-D` flag shows draft topics and posts. Remove it in production builds.
 
 ### Building
 
@@ -133,11 +133,11 @@ rm -rf public/
 
 ### Topics
 
-Topic landing pages live in `content/topics/`. Each page keeps its introduction and banner above posts assigned to that topic. Related topics are linked from the landing page. Hidden topics are drafts until they contain publishable content.
+The **Life with Luka** index groups content under five main topics. The five top-level topic pages live in `content/topics/`, along with their sub-topics. A sub-topic's `parent` field references a top-level topic; nested sub-topics are rejected at build time. The Topics index lists only the five top-level topics. PagesCMS saves uploaded images under `assets/images/` and writes references using the public `images/` path. Hidden topics and posts remain drafts until they contain publishable content.
 
 ### Topic Posts
 
-Posts live in `content/posts/` and use a `topic` reference to associate them with a topic page. Use ordered content blocks to interleave text and images. Image blocks support alt text, captions, and descriptions.
+Posts live in `content/posts/` and use a `topic` reference to associate them with a topic page. Use the post body for prose and ordered content blocks to interleave text and images. Image blocks support a single caption/description field; images are emitted without alt text.
 
 ### Home
 
@@ -229,7 +229,7 @@ blocks:
 ---
 ```
 
-Use text blocks for prose and image blocks for photos. Captions and descriptions are optional; adjacent images without them display in a compact gallery, while captioned images display in columns.
+Use text blocks for prose and image blocks for photos. The optional caption field can include both an image caption and description; adjacent images without a caption display in a compact gallery, while captioned images display in columns.
 
 ### Draft vs Published
 

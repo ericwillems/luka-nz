@@ -1,11 +1,11 @@
 ---
 title: "Antalya"
 url: "/antalya/"
+parent: content/topics/sport.md
 description: "I swam at the 11th Down Syndrome Swimming World Championships in the T21 Mens Senior Category which is for people with Down syndrome (DS), aged between 18-24years.\nThere are 3 categories - Junior, Senior and Masters. There are also people with Mosaic Down syndrome and they compete with us but have"
 draft: false
 cover:
   image: "images/antalya/antalya-01.jpg"
-  alt: ""
 ---
 ## 11th Down Syndrome Swimming World Championships
 

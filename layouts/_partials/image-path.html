@@ -1,0 +1,12 @@
+{{- $u := urls.Parse (printf "%v" .) -}}
+{{- $path := strings.TrimPrefix "./" $u.Path -}}
+{{- $path = strings.TrimPrefix "/" $path -}}
+{{- $blobMarker := "/blob/main/images/" -}}
+{{- if strings.Contains $u.Path $blobMarker -}}
+  {{- $parts := strings.Split $u.Path $blobMarker -}}
+  {{- $path = printf "images/%s" (index $parts (sub (len $parts) 1)) -}}
+{{- else -}}
+  {{- $path = strings.TrimPrefix "blob/main/" $path -}}
+  {{- $path = strings.TrimPrefix "assets/" $path -}}
+{{- end -}}
+{{- return $path -}}

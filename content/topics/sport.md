@@ -3,16 +3,13 @@ title: "Sport"
 url: "/sport/"
 description: "I'll try any sport"
 draft: false
+weight: 1
 cover:
   image: "images/sport/sport-01.jpg"
-  alt: ""
-subtopics:
-  - topics/new-zealand-representative.md
-  - topics/antalya.md
 menu:
   main:
     name: Sport
-    weight: 3
+    weight: 2
 ---
 sandsurfing in Dubai
 ![](images/sport/sport-02.jpg)

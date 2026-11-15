@@ -9,12 +9,11 @@
     {{- end }}
     {{- with .image }}
       {{- $src := partial "image-src.html" . }}
-      <figure class="image-block{{ if or $block.caption $block.description }} image-block--captioned{{ else }} image-block--uncaptioned{{ end }}">
-        <img src="{{ $src }}" alt="{{ $block.alt }}" loading="lazy">
-        {{- if or $block.caption $block.description }}
+      <figure class="image-block{{ if $block.caption }} image-block--captioned{{ else }} image-block--uncaptioned{{ end }}">
+        <img src="{{ $src }}" alt="" loading="lazy">
+        {{- with $block.caption }}
         <figcaption>
-          {{- with $block.caption }}<span class="image-caption">{{ . | markdownify }}</span>{{ end }}
-          {{- with $block.description }}<span class="image-description">{{ . | markdownify }}</span>{{ end }}
+          <span class="image-caption">{{ . | markdownify }}</span>
         </figcaption>
         {{- end }}
       </figure>

@@ -1,11 +1,11 @@
 ---
 title: "Passions"
 url: "/passions/"
+parent: content/topics/interests.md
 description: "Food, Food, Food"
 draft: false
 cover:
   image: "images/passions/passions-01.jpg"
-  alt: ""
 ---
 ## Food, Food, Food
 

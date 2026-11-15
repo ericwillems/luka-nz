@@ -1,9 +1,6 @@
 ---
 title: "Sponsorship"
+parent: content/topics/inclusion.md
 url: "/sponsorship/"
 draft: true
-menu:
-  main:
-    name: Sponsorship
-    weight: 11
 ---

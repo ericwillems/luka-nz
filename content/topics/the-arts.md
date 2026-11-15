@@ -1,15 +1,11 @@
 ---
 title: "The Arts"
 url: "/the-arts/"
+parent: content/topics/interests.md
 description: "I am a great lover of all the Arts including music, dance, drama and theatre arts. I also like architecture around the world. \nI am into dancing and have grooved for many years with StarJam. I have made many public performances.\nYou will see many of my YouTube clips include me dancing.\nI am great"
 draft: false
 cover:
   image: "images/the-arts/the-arts-01.jpg"
-  alt: ""
-menu:
-  main:
-    name: The Arts
-    weight: 5
 ---
 I am a great lover of all the Arts including music, dance, drama and theatre arts. I also like architecture around the world.
 

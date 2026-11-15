@@ -1,11 +1,11 @@
 ---
 title: "Work Experience"
 url: "/work-experience/"
+parent: content/topics/interests.md
 description: "Elmwood Trading Company"
 draft: false
 cover:
   image: "images/work-experience/work-experience-01.jpg"
-  alt: ""
 ---
 ## Elmwood Trading Company
 

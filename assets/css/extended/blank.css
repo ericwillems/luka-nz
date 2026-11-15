@@ -31,13 +31,20 @@
 }
 
 .topic-posts {
-  margin-top: 2rem;
+  margin-top: 0;
 }
 
 .topic-post {
   margin: 2rem 0;
   padding-top: 1rem;
+}
+
+.topic-post + .topic-post {
   border-top: 1px solid var(--border);
+}
+
+.topic-posts-separator {
+  margin: 2rem 0;
 }
 
 .topic-post h3 {
@@ -60,10 +67,6 @@
   margin-top: 0.5rem;
   font-size: 0.9em;
   color: var(--secondary);
-}
-
-.image-description {
-  display: block;
 }
 
 .topic-image-gallery--compact {

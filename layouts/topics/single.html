@@ -1,12 +1,30 @@
 {{- define "main" }}
+{{- $topic := . -}}
+{{- with .Params.parent }}
+  {{- $parentSlug := partial "topic-ref.html" . -}}
+  {{- with site.GetPage (printf "topics/%s.md" $parentSlug) -}}
+    {{- if .Params.parent -}}
+      {{- errorf "Topic %q cannot be nested under child topic %q; topics may only be one level deep" $topic.Title .Title -}}
+    {{- end -}}
+  {{- else -}}
+    {{- errorf "Topic %q references missing parent topic %q" $topic.Title $parentSlug -}}
+  {{- end -}}
+{{- end }}
 <article class="topic-page">
   <header class="topic-header">
     <h1>{{ .Title }}</h1>
     {{- with .Params.cover.image }}
       {{- $src := partial "image-src.html" . }}
-      <img class="topic-banner" src="{{ $src }}" alt="{{ $.Params.cover.alt | default $.Title }}" loading="eager">
+      <img class="topic-banner" src="{{ $src }}" alt="" loading="eager">
     {{- end }}
   </header>
+
+  {{- with .Params.parent }}
+    {{- $parentSlug := partial "topic-ref.html" . -}}
+    {{- with site.GetPage (printf "topics/%s.md" $parentSlug) }}
+  <p class="topic-parent"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+    {{- end }}
+  {{- end }}
 
   {{- with .Content }}
   <div class="topic-introduction md-content">
@@ -14,19 +32,26 @@
   </div>
   {{- end }}
 
-  {{- with .Params.subtopics }}
-  <nav class="topic-subtopics" aria-label="Related topics">
+  {{- if not .Params.parent }}
+    {{- $children := slice -}}
+    {{- range where site.RegularPages "Section" "topics" -}}
+      {{- $child := . -}}
+      {{- with .Params.parent -}}
+        {{- if eq (partial "topic-ref.html" .) $topic.File.BaseFileName -}}
+          {{- $children = $children | append $child -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $children }}
+  <nav class="topic-subtopics" aria-label="Sub-topics">
+    <h2>Sub-topics</h2>
     <ul>
-      {{- range . }}
-        {{- $slug := partial "topic-ref.html" . }}
-        {{- with site.GetPage (printf "topics/%s.md" $slug) }}
-          {{- if not .Draft }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-          {{- end }}
-        {{- end }}
+      {{- range sort $children "Title" }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
       {{- end }}
     </ul>
   </nav>
+    {{- end }}
   {{- end }}
 
   {{- partial "topic-posts.html" . }}

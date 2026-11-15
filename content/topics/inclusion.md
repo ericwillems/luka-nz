@@ -1,15 +1,17 @@
 ---
-title: "Advocacy"
-url: "/advocacy/"
+title: "Inclusion"
+url: "/inclusion/"
+aliases:
+  - "/advocacy/"
 description: "I am out in the community doing everyday things \nI lead by example\nI believe in inclusion"
 draft: false
+weight: 2
 cover:
   image: "images/advocacy/advocacy-01.jpg"
-  alt: ""
 menu:
   main:
-    name: Advocacy
-    weight: 4
+    name: Inclusion
+    weight: 3
 ---
 ## Be the change you wish to see in the world
 

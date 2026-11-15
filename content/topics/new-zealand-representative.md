@@ -1,11 +1,11 @@
 ---
 title: "New Zealand representative"
 url: "/new-zealand-representative/"
+parent: content/topics/sport.md
 description: "Earned 1st ever High performance S18 para medal for NZ"
 draft: false
 cover:
   image: "images/new-zealand-representative/new-zealand-representative-01.jpg"
-  alt: ""
 ---
 ## New Zealand representative S18 swimmers
 
