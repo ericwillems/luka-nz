@@ -1,7 +1,7 @@
 ---
 title: Awards
 url: /awards/
-description: National Acheivement Award Nov 2024 - Government House Luka Willems
+description: National Achievement Award Nov 2024 - Government House Luka Willems
   has had a stella 2024. He will be receiving a New Zealand Down Syndrome
   Associatioan (NZDSA), 2024 National Achievement Award at Government House in
   Wellington this Nov 14th. The award will be presented by the Rt Hon.Dame Cindy
