@@ -10,6 +10,7 @@ description: >-
   Hon.Dame Cindy
 cover:
   image: /assets/images/awards/awards-01.jpg
+  caption: sdfkljdfsnd
 draft: false
 ---
 ## National Acheivement Award Nov 2024 - Government House
