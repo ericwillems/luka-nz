@@ -1,10 +1,9 @@
 ---
 title: "Qualifications"
 url: "/qualifications/"
-parent: content/topics/interests.md
+page: content/pages/about.md
+post_limit: 3
 draft: false
-cover:
-  image: "images/qualifications/qualifications-01.jpg"
 ---
 I believe in Life-long education AND mainstream education. It ignites my brain
 

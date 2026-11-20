@@ -2,40 +2,53 @@ media:
   input: assets/images
   output: /images
 content:
-  - name: topics
-    label: Topics
+  - name: pages
+    label: Pages
     type: collection
-    path: content/topics
+    path: content/pages
     view:
-      fields: [ title, parent, draft ]
+      fields: [ title, weight, draft ]
     fields:
       - { name: title, label: Title, type: string, required: true }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: body, label: Topic Introduction and Content, type: rich-text }
       - { name: url, label: URL, type: string }
+      - { name: weight, label: Navigation Order, type: number }
       - { name: description, label: Description, type: string }
-      - name: parent
-        label: Parent Topic (choose a top-level topic)
-        type: reference
-        options:
-          collection: topics
-          value: "{path}"
-          label: "{title}"
       - name: cover
         label: Banner Image
         type: object
         fields:
           - { name: image, label: Image, type: image }
           - { name: caption, label: Caption, type: string }
-      - name: menu
-        label: Main Menu
-        type: object
-        fields:
-          - name: main
-            type: object
-            fields:
-              - { name: name, label: Menu Label, type: string }
-              - { name: weight, label: Menu Order, type: number }
+      - name: related_topics
+        label: Related Topics
+        type: reference
+        list: true
+        options:
+          collection: topics
+          value: "{path}"
+          label: "{title}"
+      - { name: draft, label: Draft, type: boolean }
+      - { name: body, label: Page Content, type: rich-text }
+  - name: topics
+    label: Topics
+    type: collection
+    path: content/topics
+    view:
+      fields: [ title, page, post_limit, draft ]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: url, label: URL, type: string }
+      - { name: description, label: Description, type: string }
+      - { name: post_limit, label: Topic Posts Shown on Page, type: number }
+      - name: page
+        label: Page
+        type: reference
+        options:
+          collection: pages
+          value: "{path}"
+          label: "{title}"
+      - { name: draft, label: Draft, type: boolean }
+      - { name: body, label: Topic Content, type: rich-text }
   - name: posts
     label: Topic Posts
     type: collection
@@ -65,8 +78,6 @@ content:
     path: content/_index.md
     fields:
       - { name: title, label: Title, type: string, required: true }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: body, label: Body, type: rich-text }
       - { name: description, label: Description, type: string }
       - name: cover
         label: Banner Image
@@ -75,5 +86,4 @@ content:
           - { name: image, label: Image, type: image }
       - { name: draft, label: Draft, type: boolean }
       - { name: body, label: Body, type: rich-text }
-          - { name: alt, label: Alt Text, type: string }
 

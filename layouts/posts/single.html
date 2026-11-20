@@ -1,6 +1,24 @@
 {{- define "main" }}
 <article class="post-single topic-post-single">
   <header class="post-header">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="{{ site.Home.RelPermalink }}">Home</a></li>
+        {{- with .Params.topic }}
+          {{- $topicSlug := partial "topic-ref.html" . }}
+          {{- with site.GetPage (printf "topics/%s.md" $topicSlug) }}
+            {{- with .Params.page }}
+              {{- $pageSlug := partial "topic-ref.html" . }}
+              {{- with site.GetPage (printf "pages/%s.md" $pageSlug) }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+              {{- end }}
+            {{- end }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{- end }}
+        {{- end }}
+        {{- with .Params.title }}<li aria-current="page">{{ . }}</li>{{ end }}
+      </ol>
+    </nav>
     {{- with .Params.title }}
     <h1>{{ . }}</h1>
     {{- end }}

@@ -1,4 +1,10 @@
-{{- $topicSlug := .File.BaseFileName -}}
+{{- $topic := . -}}
+{{- $limit := 999 -}}
+{{- if reflect.IsMap . -}}
+  {{- $topic = .Page -}}
+  {{- $limit = .Limit -}}
+{{- end -}}
+{{- $topicSlug := $topic.File.BaseFileName -}}
 {{- $posts := slice -}}
 {{- range where site.RegularPages "Section" "posts" -}}
   {{- $post := . -}}
@@ -10,9 +16,11 @@
   {{- end -}}
 {{- end -}}
 {{- if $posts }}
+{{- $posts = first $limit (sort $posts "Date" "desc") -}}
+{{- if $posts }}
 <hr class="topic-posts-separator">
 <section class="topic-posts" aria-label="Topic posts">
-  {{- range sort $posts "Date" "desc" }}
+  {{- range $posts }}
 {{- $post := . -}}
   <article class="topic-post image-group-container">
   {{- with $post.Params.title }}
@@ -28,4 +36,5 @@
   </article>
   {{- end }}
 </section>
+{{- end }}
 {{- end }}

@@ -1,11 +1,10 @@
 ---
 title: "Podcasts"
 url: "/podcasts/"
-parent: content/topics/media.md
+page: content/pages/media.md
+post_limit: 3
 description: "Life with Luka"
 draft: false
-cover:
-  image: "images/podcasts/podcasts-01.jpg"
 ---
 ## Podcast
 

@@ -5,13 +5,11 @@ aliases:
   - "/advocacy/"
 description: "I am out in the community doing everyday things \nI lead by example\nI believe in inclusion"
 draft: false
-weight: 2
+weight: 3
+related_topics:
+  - topics/sponsorship.md
 cover:
   image: "images/advocacy/advocacy-01.jpg"
-menu:
-  main:
-    name: Inclusion
-    weight: 3
 ---
 ## Be the change you wish to see in the world
 

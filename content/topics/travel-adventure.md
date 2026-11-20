@@ -1,6 +1,7 @@
 ---
 title: "Travel/adventure"
 url: "/topics/travel-adventure/"
-parent: content/topics/travel.md
+page: content/pages/travel.md
+post_limit: 3
 draft: true
 ---

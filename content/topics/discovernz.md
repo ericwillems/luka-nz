@@ -1,6 +1,7 @@
 ---
 title: "DiscoverNZ"
-parent: content/topics/travel.md
+page: content/pages/travel.md
+post_limit: 3
 url: "/discovernz/"
 draft: true
 ---

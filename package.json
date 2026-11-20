@@ -4,7 +4,7 @@
   "description": "Portfolio site built with Hugo and PagesCMS",
   "type": "module",
   "scripts": {
-    "dev": "hugo server -D",
+    "dev": "hugo server -D --baseURL http://localhost:1313/",
     "build": "hugo",
     "build:prod": "hugo --minify",
     "clean": "rm -rf public/"

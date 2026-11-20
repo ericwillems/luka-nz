@@ -12,7 +12,7 @@ This project combines:
 
 ## Features
 
-- 📝 Five main topics with one-level sub-topics and topic posts
+- 📝 Home, Pages, Topics, and Topic Posts content types
 - 🎨 Responsive design powered by PaperMod theme
 - ⚡ Fast static site generation
 - 📋 Easy content management through PagesCMS
@@ -85,8 +85,9 @@ nano content/posts/my-post.md
 ### PagesCMS UI
 
 1. Log in to the PagesCMS dashboard.
-2. Use **Topics** to edit a topic or choose a top-level parent for a sub-topic. Leave Parent Topic blank for one of the five top-level topics: Sport, Inclusion, Interests, Media, or Travel. Topics may only be one level deep.
-3. Use **Topic Posts** to add content to a topic. A post title is optional.
+2. Use **Pages** for top-level navigation entries. Pages have a banner and can reference zero or more Topics.
+3. Use **Topics** to add related topic content, select the Page it belongs to, and set how many Topic Posts to show.
+4. Use **Topic Posts** to add content to a Topic. A post title is optional.
 4. Add ordered text and image blocks. Use one caption field for an image's caption and description; consecutive images without a caption display in a compact horizontal gallery.
 5. Publish the change; PagesCMS commits it to Git.
 
@@ -98,9 +99,9 @@ nano content/posts/my-post.md
 # Start Hugo dev server with live reload
 npm run dev
 # or
-hugo server -D
+hugo server -D --baseURL http://localhost:1313/
 
-# Visit http://localhost:1313
+# Visit http://localhost:1313/
 ```
 
 The `-D` flag shows draft topics and posts. Remove it in production builds.
@@ -131,17 +132,21 @@ rm -rf public/
 
 ## Content Types
 
+### Home Page
+
+The homepage is `content/_index.md` and is editable as the **Home Page** file in PagesCMS.
+
+### Pages
+
+Pages live in `content/pages/` and represent top-level navigation. Each Page can have a banner, navigation weight, and a list of related Topics. Pages render topic navigation first, then their own content, followed by related Topic content and the configured number of posts.
+
 ### Topics
 
-The **Life with Luka** index groups content under five main topics. The five top-level topic pages live in `content/topics/`, along with their sub-topics. A sub-topic's `parent` field references a top-level topic; nested sub-topics are rejected at build time. The Topics index lists only the five top-level topics. PagesCMS saves uploaded images under `assets/images/` and writes references using the public `images/` path. Hidden topics and posts remain drafts until they contain publishable content.
+Topics live in `content/topics/`. A Topic belongs to one Page via the `page` field and has a `post_limit` that controls how many Topic Posts appear on its Page and standalone Topic page. Topics do not have banners, menu entries, or nested Topics.
 
 ### Topic Posts
 
 Posts live in `content/posts/` and use a `topic` reference to associate them with a topic page. Use the post body for prose and ordered content blocks to interleave text and images. Image blocks support a single caption/description field; images are emitted without alt text.
-
-### Home
-
-The homepage is `content/_index.md` and is editable as the **Home Page** file in PagesCMS.
 
 ## Configuration
 

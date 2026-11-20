@@ -1,11 +1,10 @@
 ---
 title: "Media Appearances"
 url: "/media-appearances/"
-parent: content/topics/media.md
+page: content/pages/media.md
+post_limit: 3
 description: "Media Appearances"
 draft: false
-cover:
-  image: "images/media-appearances/media-appearances-01.jpg"
 ---
 ![](images/media-appearances/media-appearances-02.png)
 

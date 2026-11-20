@@ -1,8 +1,15 @@
 ---
-title: "About Luka"
+title: "About Me"
 url: "/about/"
 draft: false
-parent: content/topics/interests.md
+weight: 1
+related_topics:
+  - topics/qualifications.md
+  - topics/work-experience.md
+  - topics/awards.md
+  - topics/passions.md
+cover:
+  image: "images/passions/passions-01.jpg"
 ---
 Check out my [YouTube channel](https://www.youtube.com/channel/UCV7F4ndiN-o1dMO_dfb-QfQ/) and subscribe!
 

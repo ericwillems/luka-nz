@@ -1,11 +1,10 @@
 ---
 title: "Discover The World"
 url: "/discover-the-world/"
-parent: content/topics/travel.md
+page: content/pages/travel.md
+post_limit: 3
 description: "European adventures"
 draft: false
-cover:
-  image: "images/discover-the-world/discover-the-world-01.jpg"
 ---
 ## European adventures
 

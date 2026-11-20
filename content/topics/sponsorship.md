@@ -1,6 +1,7 @@
 ---
 title: "Sponsorship"
-parent: content/topics/inclusion.md
+page: content/pages/inclusion.md
+post_limit: 3
 url: "/sponsorship/"
 draft: true
 ---
