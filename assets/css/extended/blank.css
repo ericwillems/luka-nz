@@ -2,13 +2,12 @@
   margin-bottom: 1.5rem;
 }
 
-.page-top-navigation,
-.page-topic-navigation {
+
+.category-topic-navigation {
   margin-bottom: 1.5rem;
 }
 
-.page-top-navigation ul,
-.page-topic-navigation ul,
+.category-topic-navigation ul,
 .breadcrumbs ol {
   display: flex;
   flex-wrap: wrap;
@@ -18,8 +17,7 @@
   padding: 0;
 }
 
-.page-top-navigation a,
-.page-topic-navigation a,
+.category-topic-navigation a,
 .breadcrumbs a {
   text-decoration: underline;
   text-underline-offset: 0.15em;
@@ -35,7 +33,7 @@
   color: var(--secondary);
 }
 
-.page-related-topic {
+.category-related-topic {
   margin: 2.5rem 0;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);

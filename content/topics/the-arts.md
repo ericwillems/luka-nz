@@ -1,7 +1,7 @@
 ---
 title: "The Arts"
 url: "/the-arts/"
-page: content/pages/interests.md
+category: content/categories/interests.md
 post_limit: 3
 description: "I am a great lover of all the Arts including music, dance, drama and theatre arts. I also like architecture around the world. \nI am into dancing and have grooved for many years with StarJam. I have made many public performances.\nYou will see many of my YouTube clips include me dancing.\nI am great"
 draft: false

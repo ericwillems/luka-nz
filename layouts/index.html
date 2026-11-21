@@ -1,0 +1,19 @@
+{{- define "main" }}
+<article class="home-page">
+  <header class="topic-header">
+    {{- with .Params.cover.image }}
+      {{- $src := partial "image-src.html" . }}
+    <div class="category-banner">
+      <img class="topic-banner" src="{{ $src }}" alt="" loading="eager">
+    </div>
+    {{- end }}
+    <h1>{{ .Title }}</h1>
+  </header>
+  {{- with .Description }}
+  <div class="post-description">{{ . | markdownify }}</div>
+  {{- end }}
+  {{- with .Content }}
+  <div class="topic-introduction md-content">{{ . }}</div>
+  {{- end }}
+</article>
+{{- end }}

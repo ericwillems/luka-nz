@@ -1,7 +1,7 @@
 ---
 title: "New Zealand representative"
 url: "/new-zealand-representative/"
-page: content/pages/sport.md
+category: content/categories/sport.md
 post_limit: 3
 description: "Earned 1st ever High performance S18 para medal for NZ"
 draft: false

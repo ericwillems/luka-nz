@@ -1,7 +1,7 @@
 ---
 title: "Discover The World"
 url: "/discover-the-world/"
-page: content/pages/travel.md
+category: content/categories/travel.md
 post_limit: 3
 description: "European adventures"
 draft: false

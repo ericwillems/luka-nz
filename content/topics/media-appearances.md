@@ -1,7 +1,7 @@
 ---
 title: "Media Appearances"
 url: "/media-appearances/"
-page: content/pages/media.md
+category: content/categories/media.md
 post_limit: 3
 description: "Media Appearances"
 draft: false

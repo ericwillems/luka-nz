@@ -2,10 +2,10 @@ media:
   input: assets/images
   output: /images
 content:
-  - name: pages
-    label: Pages
+  - name: categories
+    label: Categories
     type: collection
-    path: content/pages
+    path: content/categories
     view:
       fields: [ title, weight, draft ]
     fields:
@@ -28,23 +28,23 @@ content:
           value: "{path}"
           label: "{title}"
       - { name: draft, label: Draft, type: boolean }
-      - { name: body, label: Page Content, type: rich-text }
+      - { name: body, label: Category Content, type: rich-text }
   - name: topics
     label: Topics
     type: collection
     path: content/topics
     view:
-      fields: [ title, page, post_limit, draft ]
+      fields: [ title, category, post_limit, draft ]
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: url, label: URL, type: string }
       - { name: description, label: Description, type: string }
       - { name: post_limit, label: Topic Posts Shown on Page, type: number }
-      - name: page
-        label: Page
+      - name: category
+        label: Category
         type: reference
         options:
-          collection: pages
+          collection: categories
           value: "{path}"
           label: "{title}"
       - { name: draft, label: Draft, type: boolean }

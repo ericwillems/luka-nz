@@ -1,7 +1,7 @@
 ---
 title: "Passions"
 url: "/passions/"
-page: content/pages/about.md
+category: content/categories/about.md
 post_limit: 3
 description: "Food, Food, Food"
 draft: false

@@ -1,7 +1,7 @@
 ---
 title: "Podcasts"
 url: "/podcasts/"
-page: content/pages/media.md
+category: content/categories/media.md
 post_limit: 3
 description: "Life with Luka"
 draft: false

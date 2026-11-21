@@ -34,16 +34,6 @@ taxonomies:
   category: categories
   tag: tags
 
-# Menu
-menu:
-  main:
-    - name: Home
-      url: /
-      weight: 1
-    - name: YouTube
-      url: https://www.youtube.com/c/LukaWillems
-      weight: 9
-
 params:
   mainSections:
     - posts

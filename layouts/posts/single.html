@@ -7,9 +7,9 @@
         {{- with .Params.topic }}
           {{- $topicSlug := partial "topic-ref.html" . }}
           {{- with site.GetPage (printf "topics/%s.md" $topicSlug) }}
-            {{- with .Params.page }}
-              {{- $pageSlug := partial "topic-ref.html" . }}
-              {{- with site.GetPage (printf "pages/%s.md" $pageSlug) }}
+            {{- with .Params.category }}
+              {{- $categorySlug := partial "topic-ref.html" . }}
+              {{- with site.GetPage (printf "categories/%s.md" $categorySlug) }}
         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
               {{- end }}
             {{- end }}

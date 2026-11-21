@@ -1,46 +1,38 @@
 {{- define "main" }}
-{{- $pages := where site.RegularPages "Section" "pages" -}}
-<nav class="page-top-navigation" aria-label="Pages">
-  <ul>
-    {{- range sort $pages "Weight" "asc" }}
-    {{- if not .Draft }}
-    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-    {{- end }}
-    {{- end }}
-  </ul>
-</nav>
-<article class="page-page">
+<article class="category-page">
   <header class="topic-header">
-    <h1>{{ .Title }}</h1>
     {{- with .Params.cover.image }}
       {{- $src := partial "image-src.html" . }}
+    <div class="category-banner">
       <img class="topic-banner" src="{{ $src }}" alt="" loading="eager">
+    </div>
     {{- end }}
+    <h1>{{ .Title }}</h1>
   </header>
   {{- with .Content }}
   <div class="topic-introduction md-content">{{ . }}</div>
   {{- end }}
 
   {{- with .Params.related_topics }}
-  <nav class="page-topic-navigation" aria-label="Topics">
+  <nav class="category-topic-navigation" aria-label="Topics">
     <ul>
       {{- range . }}
         {{- $slug := partial "topic-ref.html" . }}
         {{- with site.GetPage (printf "topics/%s.md" $slug) }}
           {{- if not .Draft }}
-      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      <li><a href="#{{ $slug }}">{{ .Title }}</a></li>
           {{- end }}
         {{- end }}
       {{- end }}
     </ul>
   </nav>
 
-  <section class="page-related-topics">
+  <section class="category-related-topics">
     {{- range . }}
       {{- $slug := partial "topic-ref.html" . }}
       {{- with site.GetPage (printf "topics/%s.md" $slug) }}
         {{- if not .Draft }}
-    <article class="page-related-topic" id="{{ $slug }}">
+    <article class="category-related-topic" id="{{ $slug }}">
       <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
       {{- with .Description }}<p>{{ . }}</p>{{ end }}
       {{- with .Content }}<div class="topic-introduction md-content">{{ . }}</div>{{ end }}

@@ -1,7 +1,7 @@
 ---
 title: "Work Experience"
 url: "/work-experience/"
-page: content/pages/about.md
+category: content/categories/about.md
 post_limit: 3
 description: "Elmwood Trading Company"
 draft: false

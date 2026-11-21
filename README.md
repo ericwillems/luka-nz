@@ -1,6 +1,6 @@
 # Luka.nz — Hugo + PagesCMS
 
-A Hugo site for Luka.nz, with topic pages and topic-linked posts managed through PagesCMS.
+A Hugo site for Luka.nz, with Categories, Topics, and Topic Posts managed through PagesCMS.
 
 ## Overview
 
@@ -12,7 +12,7 @@ This project combines:
 
 ## Features
 
-- 📝 Home, Pages, Topics, and Topic Posts content types
+- 📝 Home, Categories, Topics, and Topic Posts content types
 - 🎨 Responsive design powered by PaperMod theme
 - ⚡ Fast static site generation
 - 📋 Easy content management through PagesCMS
@@ -25,7 +25,8 @@ This project combines:
 luka-nz/
 ├── content/
 │   ├── _index.md           # Home page
-│   ├── topics/             # Topic landing pages
+│   ├── categories/         # Top-level category pages
+│   ├── topics/             # Topic pages
 │   └── posts/              # Posts assigned to topics
 ├── assets/images/          # Images and PagesCMS uploads
 ├── layouts/                # Topic/post templates and image layouts
@@ -85,8 +86,8 @@ nano content/posts/my-post.md
 ### PagesCMS UI
 
 1. Log in to the PagesCMS dashboard.
-2. Use **Pages** for top-level navigation entries. Pages have a banner and can reference zero or more Topics.
-3. Use **Topics** to add related topic content, select the Page it belongs to, and set how many Topic Posts to show.
+2. Use **Categories** for top-level navigation entries. Categories have a banner and can reference zero or more Topics.
+3. Use **Topics** to add topic content, select the Category it belongs to, and set how many Topic Posts to show.
 4. Use **Topic Posts** to add content to a Topic. A post title is optional.
 4. Add ordered text and image blocks. Use one caption field for an image's caption and description; consecutive images without a caption display in a compact horizontal gallery.
 5. Publish the change; PagesCMS commits it to Git.
@@ -136,13 +137,13 @@ rm -rf public/
 
 The homepage is `content/_index.md` and is editable as the **Home Page** file in PagesCMS.
 
-### Pages
+### Categories
 
-Pages live in `content/pages/` and represent top-level navigation. Each Page can have a banner, navigation weight, and a list of related Topics. Pages render topic navigation first, then their own content, followed by related Topic content and the configured number of posts.
+Categories live in `content/categories/` and represent top-level navigation. Each Category can have a banner, navigation weight, and a list of related Topics. Category pages render topic navigation as anchor links to each Topic further down the page.
 
 ### Topics
 
-Topics live in `content/topics/`. A Topic belongs to one Page via the `page` field and has a `post_limit` that controls how many Topic Posts appear on its Page and standalone Topic page. Topics do not have banners, menu entries, or nested Topics.
+Topics live in `content/topics/`. A Topic belongs to one Category via the `category` field and has a `post_limit` that controls how many Topic Posts appear on its Category and standalone Topic page. Topics do not have banners, menu entries, or nested Topics.
 
 ### Topic Posts
 

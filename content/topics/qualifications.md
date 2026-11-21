@@ -1,7 +1,7 @@
 ---
 title: "Qualifications"
 url: "/qualifications/"
-page: content/pages/about.md
+category: content/categories/about.md
 post_limit: 3
 draft: false
 ---

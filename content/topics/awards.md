@@ -1,7 +1,7 @@
 ---
 title: Awards
 url: /awards/
-page: content/pages/about.md
+category: content/categories/about.md
 post_limit: 3
 description: >-
   National Achievement Award Nov 2024 - Government House.
