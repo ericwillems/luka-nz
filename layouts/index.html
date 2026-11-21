@@ -1,19 +1,21 @@
 {{- define "main" }}
 <article class="home-page">
-  <header class="topic-header">
+  <header class="home-hero">
+    {{- $dominantColor := "" -}}
     {{- with .Params.cover.image }}
       {{- $src := partial "image-src.html" . }}
-    <div class="category-banner">
-      <img class="topic-banner" src="{{ $src }}" alt="" loading="eager">
-    </div>
+      {{- $dominantColor = partial "hero-dominant-color.html" . }}
+    <img class="home-hero-image" src="{{ $src }}" alt="" loading="eager">
     {{- end }}
-    <h1>{{ .Title }}</h1>
+    <div class="home-hero-content"{{ with $dominantColor }} style="--hero-color: {{ . }};"{{ end }}>
+      <h1>{{ .Title }}</h1>
+      {{- with .Description }}
+      <div class="home-hero-description">{{ . | markdownify }}</div>
+      {{- end }}
+    </div>
   </header>
-  {{- with .Description }}
-  <div class="post-description">{{ . | markdownify }}</div>
-  {{- end }}
   {{- with .Content }}
-  <div class="topic-introduction md-content">{{ . }}</div>
+  <div class="home-content topic-introduction md-content">{{ . }}</div>
   {{- end }}
 </article>
 {{- end }}

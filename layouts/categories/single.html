@@ -1,32 +1,36 @@
 {{- define "main" }}
 <article class="category-page">
-  <header class="topic-header">
+  <header class="category-hero">
+    {{- $dominantColor := "" -}}
     {{- with .Params.cover.image }}
       {{- $src := partial "image-src.html" . }}
-    <div class="category-banner">
-      <img class="topic-banner" src="{{ $src }}" alt="" loading="eager">
-    </div>
+      {{- $dominantColor = partial "hero-dominant-color.html" . }}
+    <img class="category-hero-image" src="{{ $src }}" alt="" loading="eager">
     {{- end }}
-    <h1>{{ .Title }}</h1>
+    <div class="category-hero-content"{{ with $dominantColor }} style="--hero-color: {{ . }};"{{ end }}>
+      <h1>{{ .Title }}</h1>
+      {{- with .Params.related_topics }}
+      <nav class="category-topic-navigation" aria-label="Topics">
+        <ul>
+          {{- range . }}
+            {{- $slug := partial "topic-ref.html" . }}
+            {{- with site.GetPage (printf "topics/%s.md" $slug) }}
+              {{- if not .Draft }}
+          <li><a href="#{{ $slug }}">{{ .Title }}</a></li>
+              {{- end }}
+            {{- end }}
+          {{- end }}
+        </ul>
+      </nav>
+      {{- end }}
+    </div>
   </header>
+
   {{- with .Content }}
   <div class="topic-introduction md-content">{{ . }}</div>
   {{- end }}
 
   {{- with .Params.related_topics }}
-  <nav class="category-topic-navigation" aria-label="Topics">
-    <ul>
-      {{- range . }}
-        {{- $slug := partial "topic-ref.html" . }}
-        {{- with site.GetPage (printf "topics/%s.md" $slug) }}
-          {{- if not .Draft }}
-      <li><a href="#{{ $slug }}">{{ .Title }}</a></li>
-          {{- end }}
-        {{- end }}
-      {{- end }}
-    </ul>
-  </nav>
-
   <section class="category-related-topics">
     {{- range . }}
       {{- $slug := partial "topic-ref.html" . }}

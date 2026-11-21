@@ -1,0 +1,8 @@
+{{- $path := partial "image-path.html" . -}}
+{{- with resources.Get $path -}}
+  {{- if in (slice "image/avif" "image/bmp" "image/gif" "image/jpeg" "image/png" "image/tiff" "image/webp") .MediaType.Type -}}
+    {{- with .Colors -}}
+      {{- (index . 0).ColorHex -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
