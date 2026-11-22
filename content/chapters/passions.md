@@ -1,9 +1,9 @@
 ---
-title: "Passions"
+title: Passions
 url: "/passions/"
 volume: content/volumes/about.md
-card_limit: 3
 draft: false
+order: 4
 ---
 ## Food, Food, Food
 

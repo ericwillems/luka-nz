@@ -1,9 +1,9 @@
 ---
 title: Awards
-url: /awards/
+url: "/awards/"
 volume: content/volumes/about.md
-card_limit: 3
 draft: false
+order: 3
 ---
 ## National Acheivement Award Nov 2024 - Government House
 

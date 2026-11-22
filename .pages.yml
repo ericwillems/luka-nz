@@ -8,7 +8,11 @@ content:
     path: content/volumes
     exclude: ["_index.md"]
     view:
-      fields: [ title, weight, draft ]
+      fields: [ title, order, draft ]
+      sort: [ order ]
+      default:
+        sort: order
+        order: asc
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: draft, label: Draft, type: boolean }
@@ -28,20 +32,24 @@ content:
           value: "{path}"
           label: "{title}"
       - { name: url, label: URL, type: string }
-      - { name: weight, label: Navigation Order, type: number }
+      - { name: order, label: Navigation Order, type: number }
   - name: chapters
     label: Chapters
     type: collection
     path: content/chapters
     exclude: ["_index.md"]
     view:
-      fields: [ title, volume, card_limit, draft ]
+      fields: [ title, volume, order, draft ]
+      sort: [ volume, order ]
+      default:
+        sort: volume
+        order: asc
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: draft, label: Draft, type: boolean }
       - { name: body, label: Chapter Content, type: rich-text }
       - { name: url, label: URL, type: string }
-      - { name: card_limit, label: Cards Shown, type: number }
+      - { name: order, label: Order in Volume, type: number, readonly: true }
       - name: volume
         label: Volume
         type: reference
@@ -66,7 +74,11 @@ content:
     filename: "{primary}.md"
     view:
       primary: title
-      fields: [ title, chapter, draft ]
+      fields: [ title, chapter, order, draft ]
+      sort: [ chapter, order ]
+      default:
+        sort: chapter
+        order: asc
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: draft, label: Draft, type: boolean }
@@ -78,17 +90,14 @@ content:
           collection: chapters
           value: "{path}"
           label: "{title}"
+      - { name: order, label: Order in Chapter, type: number, readonly: true }
       - { name: hide_title, label: Hide Title, type: boolean, default: false }
       - name: images
         label: Images
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "Image ({index})"
-        fields:
-          - { name: image, label: Image, type: image, required: true }
-          - { name: caption, label: Caption, type: string }
+        type: image
+        options:
+          multiple: true
+          unique: true
       - { name: body, label: Card Content, type: rich-text }
   - name: home
     label: Home Page

@@ -1,9 +1,9 @@
 ---
-title: "Work Experience"
+title: Work Experience
 url: "/work-experience/"
 volume: content/volumes/about.md
-card_limit: 3
 draft: false
+order: 2
 ---
 ## Elmwood Trading Company
 

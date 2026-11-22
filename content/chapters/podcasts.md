@@ -1,9 +1,9 @@
 ---
-title: "Podcasts"
+title: Podcasts
 url: "/podcasts/"
 volume: content/volumes/media.md
-card_limit: 3
 draft: false
+order: 2
 ---
 ## Podcast
 

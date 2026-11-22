@@ -40,11 +40,11 @@
     </div>
     <ul id="menu" class="menu">
       {{- $volumes := where site.RegularPages "Section" "volumes" -}}
-      {{- range sort $volumes "Weight" "asc" }}
+      {{- range sort $volumes "Params.order" "asc" }}
         {{- if not .Draft }}
           {{- $isCurrentVolume := and $isVolumePage (eq .RelPermalink $currentPage.RelPermalink) -}}
       <li>
-        <a href="{{ .RelPermalink }}" title="{{ .Title }}"{{ if $isCurrentVolume }} class="active category-menu-active{{ if gt $publishedChapterCount 0 }} category-menu-active--has-topics{{ end }}" aria-current="page"{{ with $heroColor }} style="--hero-color: {{ . }};"{{ end }}{{ end }}>
+        <a href="{{ if $isCurrentVolume }}#top{{ else }}{{ .RelPermalink }}{{ end }}" title="{{ .Title }}"{{ if $isCurrentVolume }} class="active category-menu-active" aria-current="page"{{ with $heroColor }} style="--hero-color: {{ . }};"{{ end }}{{ end }}>
           <span>{{- .Title -}}</span>
         </a>
       </li>

@@ -2,7 +2,7 @@
 title: "Interests"
 url: "/interests/"
 draft: false
-weight: 4
+order: 4
 chapters:
   - content/chapters/food-with-luka.md
   - content/chapters/the-arts.md

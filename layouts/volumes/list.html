@@ -2,7 +2,7 @@
 <header class="page-header">
   <h1>{{ .Title }}</h1>
 </header>
-{{- range sort .RegularPages "Weight" "asc" }}
+{{- range sort .RegularPages "Params.order" "asc" }}
 <article class="post-entry">
   <header class="entry-header"><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2></header>
 </article>

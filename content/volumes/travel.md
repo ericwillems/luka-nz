@@ -2,7 +2,7 @@
 title: "Travel"
 url: "/travel/"
 draft: false
-weight: 6
+order: 6
 chapters:
   - content/chapters/discover-the-world.md
   - content/chapters/discovernz.md

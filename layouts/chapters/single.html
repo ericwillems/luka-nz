@@ -21,10 +21,6 @@
     {{ . }}
   </div>
   {{- end }}
-  {{- $limit := 3 -}}
-  {{- if isset .Params "card_limit" -}}
-    {{- $limit = .Params.card_limit -}}
-  {{- end -}}
-  {{- partial "chapter-cards.html" (dict "Page" . "Limit" $limit) }}
+  {{- partial "chapter-cards.html" (dict "Page" .) }}
 </article>
 {{- end }}

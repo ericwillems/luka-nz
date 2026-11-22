@@ -1,9 +1,9 @@
 ---
-title: "Discover The World"
+title: Discover The World
 url: "/discover-the-world/"
 volume: content/volumes/travel.md
-card_limit: 3
 draft: false
+order: 1
 ---
 ## European adventures
 

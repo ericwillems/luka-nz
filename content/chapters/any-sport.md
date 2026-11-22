@@ -1,11 +1,11 @@
 ---
 title: Any Sport
 draft: false
-url: /any-sport/
-card_limit: 3
+url: "/any-sport/"
 volume: content/volumes/sport.md
 cards:
   - content/cards/any-sport.md
+order: 2
 ---
 # **I'll try any sport**
 

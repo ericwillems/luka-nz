@@ -6,11 +6,15 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: hugo-deploy-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pages: write
       id-token: write
 
@@ -25,6 +29,22 @@ jobs:
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: latest
+
+      - name: Test content reference synchronization
+        run: ruby tests/sync-content-references_test.rb
+
+      - name: Synchronize ordered content references
+        if: github.event_name == 'push'
+        run: |
+          ruby scripts/sync-content-references.rb
+          if ! git diff --quiet -- content/volumes content/chapters content/cards; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add content/volumes content/chapters content/cards
+            git commit -m "Sync ordered content references" \
+              -m "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+            git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
+          fi
 
       - name: Build site
         run: hugo --minify

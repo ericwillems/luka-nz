@@ -4,7 +4,7 @@ url: "/inclusion/"
 aliases:
   - "/advocacy/"
 draft: false
-weight: 3
+order: 3
 chapters:
   - content/chapters/sponsorship.md
 cover:

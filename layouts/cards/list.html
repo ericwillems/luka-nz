@@ -4,7 +4,7 @@
 </header>
 <section class="topic-posts" aria-label="Cards">
   {{- range sort .RegularPages "Title" "asc" }}
-    {{- partial "card.html" (dict "Page" . "Heading" "h2" "Linked" true) }}
+    {{- partial "card.html" (dict "Page" . "Heading" "h2") }}
   {{- end }}
 </section>
 {{- end }}

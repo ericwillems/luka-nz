@@ -1,7 +1,7 @@
 ---
 title: About Me
 url: /about/
-weight: 1
+order: 1
 cover:
   image: /images/passions/passions-01.jpg
 chapters:

@@ -1,9 +1,9 @@
 ---
-title: "Antalya"
+title: Antalya
 url: "/antalya/"
 volume: content/volumes/sport.md
-card_limit: 3
 draft: false
+order: 3
 ---
 ## 11th Down Syndrome Swimming World Championships
 

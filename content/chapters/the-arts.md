@@ -1,9 +1,9 @@
 ---
-title: "The Arts"
+title: The Arts
 url: "/the-arts/"
 volume: content/volumes/interests.md
-card_limit: 3
 draft: false
+order: 2
 ---
 I am a great lover of all the Arts including music, dance, drama and theatre arts. I also like architecture around the world.
 

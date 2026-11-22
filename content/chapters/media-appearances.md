@@ -1,9 +1,9 @@
 ---
-title: "Media Appearances"
+title: Media Appearances
 url: "/media-appearances/"
 volume: content/volumes/media.md
-card_limit: 3
 draft: false
+order: 1
 ---
 ![](images/media-appearances/media-appearances-02.png)
 

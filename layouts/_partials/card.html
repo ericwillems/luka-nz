@@ -1,12 +1,31 @@
 {{- $card := .Page -}}
 {{- $heading := .Heading | default "h3" -}}
-{{- $linked := .Linked -}}
 {{- $extraClass := .Class -}}
+{{- $isFullPage := eq $extraClass "card-single" -}}
 {{- $images := $card.Params.images -}}
-{{- $isGallery := gt (len $images) 1 -}}
+{{- $isCollage := gt (len $images) 1 -}}
+{{- $plainContent := $card.Content | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace -}}
+{{- $contentWords := findRE `\S+` $plainContent -}}
+{{- $isTruncated := false -}}
+{{- $summary := "" -}}
+{{- if and (not $isFullPage) (gt (len $contentWords) 80) -}}
+  {{- $summaryWords := 0 -}}
+  {{- $summaryFinished := false -}}
+  {{- range (findRE `[^.!?]+[.!?]+["'’”)]*|[^.!?]+$` $plainContent) -}}
+    {{- $sentence := strings.TrimSpace . -}}
+    {{- $sentenceWords := len (findRE `\S+` $sentence) -}}
+    {{- if and (not $summaryFinished) (or (le (add $summaryWords $sentenceWords) 80) (eq $summaryWords 0)) -}}
+      {{- $summary = strings.TrimSpace (printf "%s %s" $summary $sentence) -}}
+      {{- $summaryWords = add $summaryWords $sentenceWords -}}
+    {{- else -}}
+      {{- $summaryFinished = true -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $isTruncated = and (ne $summary "") (ne $summary $plainContent) -}}
+{{- end -}}
 {{- $className := "topic-post card-entry" -}}
-{{- if $isGallery -}}
-  {{- $className = printf "%s topic-post--gallery" $className -}}
+{{- if $isCollage -}}
+  {{- $className = printf "%s topic-post--collage" $className -}}
 {{- else -}}
   {{- $className = printf "%s topic-post--column" $className -}}
 {{- end -}}
@@ -15,39 +34,31 @@
 {{- end }}
 <article class="{{ $className }}">
   {{- with $images }}
-  <div class="card-image-strip">
+  <div class="card-image-collage">
     {{- range . }}
-      {{- $image := . -}}
-      {{- with .image }}
-        {{- $src := partial "image-src.html" . }}
+      {{- $src := partial "image-src.html" . }}
     <figure class="card-image">
       <img src="{{ $src }}" alt="" loading="lazy">
-      {{- with $image.caption }}
-      <figcaption>{{ . | markdownify }}</figcaption>
-      {{- end }}
     </figure>
-      {{- end }}
     {{- end }}
   </div>
   {{- end }}
   <div class="card-copy">
     {{- if and (not $card.Params.hide_title) $card.Title }}
       {{- if eq $heading "h1" }}
-        {{- if $linked }}
-    <h1 class="card-title"><a href="{{ $card.RelPermalink }}">{{ $card.Title }}</a></h1>
-        {{- else }}
     <h1 class="card-title">{{ $card.Title }}</h1>
-        {{- end }}
       {{- else }}
-        {{- if $linked }}
-    <h3 class="card-title"><a href="{{ $card.RelPermalink }}">{{ $card.Title }}</a></h3>
-        {{- else }}
     <h3 class="card-title">{{ $card.Title }}</h3>
-        {{- end }}
       {{- end }}
     {{- end }}
     {{- with $card.Content }}
+      {{- if $isTruncated }}
+    <div class="post-content md-content">
+      <p>{{ $summary }} <a class="card-read-more" href="{{ $card.RelPermalink }}" aria-label="Read more about {{ $card.Title }}">Read more</a></p>
+    </div>
+      {{- else }}
     <div class="post-content md-content">{{ . }}</div>
+      {{- end }}
     {{- end }}
   </div>
 </article>

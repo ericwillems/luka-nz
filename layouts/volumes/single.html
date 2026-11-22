@@ -23,13 +23,9 @@
       {{- with site.GetPage (printf "chapters/%s.md" $slug) }}
         {{- if not .Draft }}
     <article class="category-related-topic" id="{{ $slug }}">
-      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <h1><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
       {{- with .Content }}<div class="topic-introduction md-content">{{ . }}</div>{{ end }}
-      {{- $limit := 3 -}}
-      {{- if isset .Params "card_limit" -}}
-        {{- $limit = .Params.card_limit -}}
-      {{- end -}}
-      {{- partial "chapter-cards.html" (dict "Page" . "Limit" $limit) }}
+      {{- partial "chapter-cards.html" (dict "Page" .) }}
     </article>
         {{- end }}
       {{- end }}

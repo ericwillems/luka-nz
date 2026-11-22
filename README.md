@@ -88,8 +88,10 @@ nano content/cards/my-card.md
 1. Log in to the PagesCMS dashboard.
 2. Use **Volumes** for top-level navigation entries. Each volume can have a banner and an ordered list of chapters.
 3. Use **Chapters** to add chapter content, select its volume, and set the ordered cards to display.
-4. Use **Cards** to add content to a chapter. Cards have a title, body, optional title hiding, and an ordered list of images with optional captions.
+4. Use **Cards** to add content to a chapter. Cards have a title, body, optional title hiding, and a multi-image field.
 5. Publish the change; PagesCMS commits it to Git.
+
+On pushes to `main`, the deployment workflow synchronizes chapter/card references from each entry's selected parent. New entries are inserted at the top, deleted or reassigned entries are removed from the old parent, and read-only order values are updated for the collection views.
 
 ## Development
 
@@ -138,15 +140,15 @@ The homepage is `content/_index.md` and is editable as the **Home Page** file in
 
 ### Volumes
 
-Volumes live in `content/volumes/` and represent top-level navigation. Each volume can have a banner, navigation weight, and an ordered list of chapters. Volume pages render chapter navigation as anchor links to each chapter further down the page.
+Volumes live in `content/volumes/` and represent top-level navigation. Each volume can have a banner, navigation order, and an ordered list of chapters. Volume pages render chapter navigation as anchor links to each chapter further down the page.
 
 ### Chapters
 
-Chapters live in `content/chapters/`. Each chapter belongs to one volume via the `volume` field and has an ordered `cards` reference list. The optional `card_limit` controls how many cards appear on its volume and standalone chapter pages. A volume's `chapters` list determines which chapters appear and in what order.
+Chapters live in `content/chapters/`. Each chapter belongs to one volume via the `volume` field and has an ordered `cards` reference list. All assigned cards appear on volume and standalone chapter pages. The Chapters CMS view is sorted by volume and displays each chapter's order within that volume.
 
 ### Cards
 
-Cards live in `content/cards/` and use a `chapter` reference to associate them with a chapter. Add each card to that chapter's `cards` list as well; the list determines inclusion and display order. Use the card body for prose and the `images` list for images with optional captions. Cards with zero or one image use a one-third-width column; cards with multiple images use a full-width horizontal image strip followed by the title and body. Set `hide_title: true` to omit a card's title from its display.
+Cards live in `content/cards/` and use a `chapter` reference to associate them with a chapter. The Cards CMS view is sorted by chapter and displays each card's order within that chapter. Use the card body for prose and the `images` field for multiple images. Cards with zero or one image use a one-third-width column; cards with multiple images use a full-width collage followed by the title and body. Card text over 80 words on volume and chapter pages is previewed to a sentence boundary with a **Read more** link; a card's own page shows its full content at full width. Set `hide_title: true` to omit a card's title from its display.
 
 ## Configuration
 
@@ -218,7 +220,7 @@ Edit `.pages.yml` to:
 
 ### Front Matter Format
 
-Cards use YAML front matter and an ordered list of image objects:
+Cards use YAML front matter and an ordered image list:
 
 ```yaml
 ---
@@ -227,13 +229,13 @@ chapter: content/chapters/sport.md
 draft: false
 hide_title: false
 images:
-  - image: images/sport/example.jpg
-    caption: "Optional caption"
+  - images/sport/example.jpg
+  - images/sport/example-2.jpg
 ---
 Card body text goes here.
 ```
 
-Cards do not need a date. The chapter's ordered card references control their position.
+Cards do not need a date. The chapter's ordered card references control their position and are synchronized automatically on pushes to `main`.
 
 ### Draft vs Published
 

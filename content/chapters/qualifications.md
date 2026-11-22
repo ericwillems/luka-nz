@@ -1,9 +1,9 @@
 ---
-title: "Qualifications"
+title: Qualifications
 url: "/qualifications/"
 volume: content/volumes/about.md
-card_limit: 3
 draft: false
+order: 1
 ---
 I believe in Life-long education AND mainstream education. It ignites my brain
 
