@@ -10,9 +10,9 @@ content:
       fields: [ title, weight, draft ]
     fields:
       - { name: title, label: Title, type: string, required: true }
-      - { name: url, label: URL, type: string }
-      - { name: weight, label: Navigation Order, type: number }
       - { name: description, label: Description, type: string }
+      - { name: draft, label: Draft, type: boolean }
+      - { name: body, label: Category Content, type: rich-text }
       - name: cover
         label: Banner Image
         type: object
@@ -27,8 +27,8 @@ content:
           collection: topics
           value: "{path}"
           label: "{title}"
-      - { name: draft, label: Draft, type: boolean }
-      - { name: body, label: Category Content, type: rich-text }
+      - { name: url, label: URL, type: string }
+      - { name: weight, label: Navigation Order, type: number }
   - name: topics
     label: Topics
     type: collection
@@ -37,8 +37,10 @@ content:
       fields: [ title, category, post_limit, draft ]
     fields:
       - { name: title, label: Title, type: string, required: true }
-      - { name: url, label: URL, type: string }
+      - { name: draft, label: Draft, type: boolean }
       - { name: description, label: Description, type: string }
+      - { name: body, label: Topic Content, type: rich-text }
+      - { name: url, label: URL, type: string }
       - { name: post_limit, label: Topic Posts Shown on Page, type: number }
       - name: category
         label: Category
@@ -47,8 +49,6 @@ content:
           collection: categories
           value: "{path}"
           label: "{title}"
-      - { name: draft, label: Draft, type: boolean }
-      - { name: body, label: Topic Content, type: rich-text }
   - name: posts
     label: Topic Posts
     type: collection
@@ -57,9 +57,9 @@ content:
       fields: [ title, topic, date, draft ]
     fields:
       - { name: title, label: Title, type: string }
+      - { name: draft, label: Draft, type: boolean }
       - { name: topic, label: Topic, type: reference, required: true, options: { collection: topics, value: "{path}", label: "{title}" } }
       - { name: date, label: Date, type: date }
-      - { name: draft, label: Draft, type: boolean }
       - { name: body, label: Post Text, type: rich-text }
       - name: blocks
         label: Post Content (in order)
@@ -78,12 +78,12 @@ content:
     path: content/_index.md
     fields:
       - { name: title, label: Title, type: string, required: true }
+      - { name: draft, label: Draft, type: boolean }
       - { name: description, label: Description, type: string }
+      - { name: body, label: Body, type: rich-text }
       - name: cover
         label: Banner Image
         type: object
         fields:
           - { name: image, label: Image, type: image }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: body, label: Body, type: rich-text }
 

@@ -1,3 +1,22 @@
+{{- $currentPage := . -}}
+{{- $isCategoryPage := and (eq .Section "categories") (not .IsSection) -}}
+{{- $heroColor := "" -}}
+{{- if $isCategoryPage -}}
+  {{- with .Params.cover.image -}}
+    {{- $heroColor = partial "hero-dominant-color.html" . -}}
+  {{- end -}}
+{{- end -}}
+{{- $publishedTopicCount := 0 -}}
+{{- if and $isCategoryPage $currentPage.Params.related_topics -}}
+  {{- range $currentPage.Params.related_topics -}}
+    {{- $slug := partial "topic-ref.html" . -}}
+    {{- with site.GetPage (printf "topics/%s.md" $slug) -}}
+      {{- if not .Draft -}}
+        {{- $publishedTopicCount = add $publishedTopicCount 1 -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 <header class="header">
   <nav class="header-nav">
     <div class="logo">
@@ -23,8 +42,9 @@
       {{- $categories := where site.RegularPages "Section" "categories" -}}
       {{- range sort $categories "Weight" "asc" }}
         {{- if not .Draft }}
+          {{- $isCurrentCategory := and $isCategoryPage (eq .RelPermalink $currentPage.RelPermalink) -}}
       <li>
-        <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+        <a href="{{ .RelPermalink }}" title="{{ .Title }}"{{ if $isCurrentCategory }} class="active category-menu-active{{ if gt $publishedTopicCount 0 }} category-menu-active--has-topics{{ end }}" aria-current="page"{{ with $heroColor }} style="--hero-color: {{ . }};"{{ end }}{{ end }}>
           <span>{{- .Title -}}</span>
         </a>
       </li>
@@ -32,4 +52,53 @@
       {{- end }}
     </ul>
   </nav>
+  {{- if and $isCategoryPage (gt $publishedTopicCount 0) }}
+  <nav class="category-topic-navigation" aria-label="Topics"{{ with $heroColor }} style="--hero-color: {{ . }};"{{ end }}>
+    <ul>
+      {{- range .Params.related_topics }}
+        {{- $slug := partial "topic-ref.html" . }}
+        {{- with site.GetPage (printf "topics/%s.md" $slug) }}
+          {{- if not .Draft }}
+      <li><a href="{{ printf "#%s" $slug }}">{{ .Title }}</a></li>
+          {{- end }}
+        {{- end }}
+      {{- end }}
+    </ul>
+  </nav>
+  <script>
+    (() => {
+      const header = document.querySelector(".header");
+      const activeCategory = header?.querySelector(".category-menu-active");
+      const topicNavigation = header?.querySelector(".category-topic-navigation");
+      const menu = header?.querySelector(".menu");
+
+      if (!header || !activeCategory || !topicNavigation || !menu) return;
+
+      const updateTopicNavigationPosition = () => {
+        const categoryBounds = activeCategory.getBoundingClientRect();
+        const topicWidth = topicNavigation.getBoundingClientRect().width;
+        const centeredLeft = categoryBounds.left + categoryBounds.width / 2 - topicWidth / 2;
+        const left = Math.max(0, Math.min(centeredLeft, window.innerWidth - topicWidth));
+        topicNavigation.style.left = `${left}px`;
+      };
+
+      const revealActiveCategory = () => {
+        const menuBounds = menu.getBoundingClientRect();
+        const categoryBounds = activeCategory.getBoundingClientRect();
+
+        if (categoryBounds.left < menuBounds.left || categoryBounds.right > menuBounds.right) {
+          activeCategory.scrollIntoView({ block: "nearest", inline: "center" });
+        }
+
+        updateTopicNavigationPosition();
+      };
+
+      requestAnimationFrame(revealActiveCategory);
+      window.addEventListener("load", revealActiveCategory, { once: true });
+      menu?.addEventListener("scroll", updateTopicNavigationPosition, { passive: true });
+      window.addEventListener("resize", updateTopicNavigationPosition, { passive: true });
+      document.fonts?.ready.then(updateTopicNavigationPosition);
+    })();
+  </script>
+  {{- end }}
 </header>
