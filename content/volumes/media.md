@@ -1,12 +1,12 @@
 ---
 title: Media
-url: "/media/"
 draft: false
-order: 5
+cover:
+  image: images/media-appearances/media-appearances-01.jpg
 chapters:
   - content/chapters/media-appearances.md
   - content/chapters/podcasts.md
-cover:
-  image: images/media-appearances/media-appearances-01.jpg
+url: /media/
+order: 2
 ---
 [YouTube](https://www.youtube.com/c/LukaWillems)
