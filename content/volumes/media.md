@@ -7,6 +7,6 @@ chapters:
   - content/chapters/media-appearances.md
   - content/chapters/podcasts.md
 url: /media/
-order: 2
+order: 5
 ---
 [YouTube](https://www.youtube.com/c/LukaWillems)
