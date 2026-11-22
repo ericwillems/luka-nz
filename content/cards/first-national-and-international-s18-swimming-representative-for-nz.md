@@ -5,7 +5,7 @@ chapter: content/chapters/new-zealand-representative.md
 hide_title: false
 images:
   - "/images/new-zealand-representative/new-zealand-representative-02.jpg"
-order: 3
+order: 2
 ---
 I have represented New Zealand as an S18 swimmer in many International events including Virtus and DS Worlds.
 
