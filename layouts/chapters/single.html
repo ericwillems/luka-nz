@@ -1,0 +1,30 @@
+{{- define "main" }}
+<article class="topic-page">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ site.Home.RelPermalink }}">Home</a></li>
+      {{- with .Params.volume }}
+        {{- $volumeSlug := partial "content-ref.html" . }}
+        {{- with site.GetPage (printf "volumes/%s.md" $volumeSlug) }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{- end }}
+      {{- end }}
+      <li aria-current="page">{{ .Title }}</li>
+    </ol>
+  </nav>
+  <header class="topic-header">
+    <h1>{{ .Title }}</h1>
+  </header>
+
+  {{- with .Content }}
+  <div class="topic-introduction md-content">
+    {{ . }}
+  </div>
+  {{- end }}
+  {{- $limit := 3 -}}
+  {{- if isset .Params "card_limit" -}}
+    {{- $limit = .Params.card_limit -}}
+  {{- end -}}
+  {{- partial "chapter-cards.html" (dict "Page" . "Limit" $limit) }}
+</article>
+{{- end }}

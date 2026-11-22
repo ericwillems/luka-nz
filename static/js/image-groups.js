@@ -1,6 +1,6 @@
 (() => {
   const containers = document.querySelectorAll(
-    ".topic-introduction, .post-content-blocks"
+    ".topic-introduction, .post-content"
   );
 
   for (const container of containers) {

@@ -31,9 +31,8 @@ markup:
 
 # Taxonomies
 taxonomies:
-  category: categories
   tag: tags
 
 params:
   mainSections:
-    - posts
+    - cards

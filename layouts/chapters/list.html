@@ -1,0 +1,27 @@
+{{- define "main" }}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <div class="post-description">{{ . | markdownify }}</div>
+  {{- end }}
+</header>
+
+{{- range sort .RegularPages "Weight" "asc" }}
+<article class="post-entry">
+  {{- with .Params.cover.image }}
+    {{- $src := partial "image-src.html" . }}
+  <figure class="entry-cover">
+    <img src="{{ $src }}" alt="" loading="lazy">
+  </figure>
+  {{- end }}
+  <header class="entry-header">
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  </header>
+  {{- if .Summary }}
+  <div class="entry-content">
+    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+  </div>
+  {{- end }}
+</article>
+{{- end }}
+{{- end }}

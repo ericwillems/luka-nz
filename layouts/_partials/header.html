@@ -1,18 +1,18 @@
 {{- $currentPage := . -}}
-{{- $isCategoryPage := and (eq .Section "categories") (not .IsSection) -}}
+{{- $isVolumePage := and (eq .Section "volumes") (not .IsSection) -}}
 {{- $heroColor := "" -}}
-{{- if $isCategoryPage -}}
+{{- if $isVolumePage -}}
   {{- with .Params.cover.image -}}
     {{- $heroColor = partial "hero-dominant-color.html" . -}}
   {{- end -}}
 {{- end -}}
-{{- $publishedTopicCount := 0 -}}
-{{- if and $isCategoryPage $currentPage.Params.related_topics -}}
-  {{- range $currentPage.Params.related_topics -}}
-    {{- $slug := partial "topic-ref.html" . -}}
-    {{- with site.GetPage (printf "topics/%s.md" $slug) -}}
+{{- $publishedChapterCount := 0 -}}
+{{- if and $isVolumePage $currentPage.Params.chapters -}}
+  {{- range $currentPage.Params.chapters -}}
+    {{- $slug := partial "content-ref.html" . -}}
+    {{- with site.GetPage (printf "chapters/%s.md" $slug) -}}
       {{- if not .Draft -}}
-        {{- $publishedTopicCount = add $publishedTopicCount 1 -}}
+        {{- $publishedChapterCount = add $publishedChapterCount 1 -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
@@ -39,12 +39,12 @@
       {{- end }}
     </div>
     <ul id="menu" class="menu">
-      {{- $categories := where site.RegularPages "Section" "categories" -}}
-      {{- range sort $categories "Weight" "asc" }}
+      {{- $volumes := where site.RegularPages "Section" "volumes" -}}
+      {{- range sort $volumes "Weight" "asc" }}
         {{- if not .Draft }}
-          {{- $isCurrentCategory := and $isCategoryPage (eq .RelPermalink $currentPage.RelPermalink) -}}
+          {{- $isCurrentVolume := and $isVolumePage (eq .RelPermalink $currentPage.RelPermalink) -}}
       <li>
-        <a href="{{ .RelPermalink }}" title="{{ .Title }}"{{ if $isCurrentCategory }} class="active category-menu-active{{ if gt $publishedTopicCount 0 }} category-menu-active--has-topics{{ end }}" aria-current="page"{{ with $heroColor }} style="--hero-color: {{ . }};"{{ end }}{{ end }}>
+        <a href="{{ .RelPermalink }}" title="{{ .Title }}"{{ if $isCurrentVolume }} class="active category-menu-active{{ if gt $publishedChapterCount 0 }} category-menu-active--has-topics{{ end }}" aria-current="page"{{ with $heroColor }} style="--hero-color: {{ . }};"{{ end }}{{ end }}>
           <span>{{- .Title -}}</span>
         </a>
       </li>
@@ -52,12 +52,12 @@
       {{- end }}
     </ul>
   </nav>
-  {{- if and $isCategoryPage (gt $publishedTopicCount 0) }}
-  <nav class="category-topic-navigation" aria-label="Topics"{{ with $heroColor }} style="--hero-color: {{ . }};"{{ end }}>
+  {{- if and $isVolumePage (gt $publishedChapterCount 0) }}
+  <nav class="category-topic-navigation" aria-label="Chapters"{{ with $heroColor }} style="--hero-color: {{ . }};"{{ end }}>
     <ul>
-      {{- range .Params.related_topics }}
-        {{- $slug := partial "topic-ref.html" . }}
-        {{- with site.GetPage (printf "topics/%s.md" $slug) }}
+      {{- range .Params.chapters }}
+        {{- $slug := partial "content-ref.html" . }}
+        {{- with site.GetPage (printf "chapters/%s.md" $slug) }}
           {{- if not .Draft }}
       <li><a href="{{ printf "#%s" $slug }}">{{ .Title }}</a></li>
           {{- end }}

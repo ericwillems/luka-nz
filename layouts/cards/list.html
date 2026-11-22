@@ -1,0 +1,10 @@
+{{- define "main" }}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+</header>
+<section class="topic-posts" aria-label="Cards">
+  {{- range sort .RegularPages "Title" "asc" }}
+    {{- partial "card.html" (dict "Page" . "Heading" "h2" "Linked" true) }}
+  {{- end }}
+</section>
+{{- end }}

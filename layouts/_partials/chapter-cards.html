@@ -1,0 +1,29 @@
+{{- $chapter := .Page -}}
+{{- $limit := int .Limit -}}
+{{- $cards := slice -}}
+{{- range $chapter.Params.cards -}}
+  {{- $cardPath := printf "cards/%s.md" (partial "content-ref.html" .) -}}
+  {{- with site.GetPage $cardPath -}}
+    {{- $card := . -}}
+    {{- $isRegularPage := false -}}
+    {{- range site.RegularPages -}}
+      {{- if eq .File.Path $card.File.Path -}}
+        {{- $isRegularPage = true -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $isRegularPage -}}
+      {{- $cards = $cards | append $card -}}
+    {{- end -}}
+  {{- else -}}
+    {{- errorf "chapter %q references missing card %q" $chapter.File.Path $cardPath -}}
+  {{- end -}}
+{{- end -}}
+{{- $cards = first $limit $cards -}}
+{{- with $cards }}
+<hr class="topic-posts-separator">
+<section class="topic-posts" aria-label="Cards">
+  {{- range . }}
+    {{- partial "card.html" (dict "Page" . "Heading" "h3" "Linked" true) }}
+  {{- end }}
+</section>
+{{- end }}

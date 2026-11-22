@@ -2,76 +2,94 @@ media:
   input: assets/images
   output: /images
 content:
-  - name: categories
-    label: Categories
+  - name: volumes
+    label: Volumes
     type: collection
-    path: content/categories
+    path: content/volumes
+    exclude: ["_index.md"]
     view:
       fields: [ title, weight, draft ]
     fields:
       - { name: title, label: Title, type: string, required: true }
-      - { name: description, label: Description, type: string }
       - { name: draft, label: Draft, type: boolean }
-      - { name: body, label: Category Content, type: rich-text }
       - name: cover
         label: Banner Image
         type: object
         fields:
           - { name: image, label: Image, type: image }
           - { name: caption, label: Caption, type: string }
-      - name: related_topics
-        label: Related Topics
+      - { name: body, label: Volume Content, type: rich-text }
+      - name: chapters
+        label: Chapters (display order)
         type: reference
         list: true
         options:
-          collection: topics
+          collection: chapters
           value: "{path}"
           label: "{title}"
       - { name: url, label: URL, type: string }
       - { name: weight, label: Navigation Order, type: number }
-  - name: topics
-    label: Topics
+  - name: chapters
+    label: Chapters
     type: collection
-    path: content/topics
+    path: content/chapters
+    exclude: ["_index.md"]
     view:
-      fields: [ title, category, post_limit, draft ]
+      fields: [ title, volume, card_limit, draft ]
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: draft, label: Draft, type: boolean }
-      - { name: description, label: Description, type: string }
-      - { name: body, label: Topic Content, type: rich-text }
+      - { name: body, label: Chapter Content, type: rich-text }
       - { name: url, label: URL, type: string }
-      - { name: post_limit, label: Topic Posts Shown on Page, type: number }
-      - name: category
-        label: Category
+      - { name: card_limit, label: Cards Shown, type: number }
+      - name: volume
+        label: Volume
         type: reference
+        required: true
         options:
-          collection: categories
+          collection: volumes
           value: "{path}"
           label: "{title}"
-  - name: posts
-    label: Topic Posts
+      - name: cards
+        label: Cards (display order)
+        type: reference
+        list: true
+        options:
+          collection: cards
+          value: "{path}"
+          label: "{title}"
+  - name: cards
+    label: Cards
     type: collection
-    path: content/posts
+    path: content/cards
+    exclude: ["_index.md"]
+    filename: "{primary}.md"
     view:
-      fields: [ title, topic, date, draft ]
+      primary: title
+      fields: [ title, chapter, draft ]
     fields:
-      - { name: title, label: Title, type: string }
+      - { name: title, label: Title, type: string, required: true }
       - { name: draft, label: Draft, type: boolean }
-      - { name: topic, label: Topic, type: reference, required: true, options: { collection: topics, value: "{path}", label: "{title}" } }
-      - { name: date, label: Date, type: date }
-      - { name: body, label: Post Text, type: rich-text }
-      - name: blocks
-        label: Post Content (in order)
+      - name: chapter
+        label: Chapter
+        type: reference
+        required: true
+        options:
+          collection: chapters
+          value: "{path}"
+          label: "{title}"
+      - { name: hide_title, label: Hide Title, type: boolean, default: false }
+      - name: images
+        label: Images
         type: object
         list:
           collapsible:
             collapsed: true
-            summary: "Content block ({index})"
+            summary: "Image ({index})"
         fields:
-          - { name: text, label: Text (optional), type: rich-text }
-          - { name: image, label: Image (optional), type: image }
-          - { name: caption, label: Image Caption / Description, type: string }
+          - { name: image, label: Image, type: image, required: true }
+          - { name: caption, label: Caption, type: string }
+      - { name: body, label: Card Content, type: rich-text }
   - name: home
     label: Home Page
     type: file

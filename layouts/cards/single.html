@@ -1,0 +1,26 @@
+{{- define "main" }}
+{{- $card := . -}}
+<article class="post-single topic-post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="{{ site.Home.RelPermalink }}">Home</a></li>
+        {{- with $card.Params.chapter }}
+          {{- $chapterSlug := partial "content-ref.html" . }}
+          {{- with site.GetPage (printf "chapters/%s.md" $chapterSlug) }}
+            {{- $chapter := . -}}
+            {{- with $chapter.Params.volume }}
+              {{- $volumeSlug := partial "content-ref.html" . }}
+              {{- with site.GetPage (printf "volumes/%s.md" $volumeSlug) }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+              {{- end }}
+            {{- end }}
+        <li><a href="{{ $chapter.RelPermalink }}">{{ $chapter.Title }}</a></li>
+          {{- end }}
+        {{- end }}
+      </ol>
+    </nav>
+  </header>
+  {{- partial "card.html" (dict "Page" $card "Heading" "h1" "Linked" false "Class" "card-single") }}
+</article>
+{{- end }}

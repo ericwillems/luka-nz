@@ -1,6 +1,6 @@
 # Luka.nz — Hugo + PagesCMS
 
-A Hugo site for Luka.nz, with Categories, Topics, and Topic Posts managed through PagesCMS.
+A Hugo site for Luka.nz, with Volumes, Chapters, and Cards managed through PagesCMS.
 
 ## Overview
 
@@ -12,7 +12,7 @@ This project combines:
 
 ## Features
 
-- 📝 Home, Categories, Topics, and Topic Posts content types
+- 📝 Home, Volumes, Chapters, and Cards content types
 - 🎨 Responsive design powered by PaperMod theme
 - ⚡ Fast static site generation
 - 📋 Easy content management through PagesCMS
@@ -25,11 +25,11 @@ This project combines:
 luka-nz/
 ├── content/
 │   ├── _index.md           # Home page
-│   ├── categories/         # Top-level category pages
-│   ├── topics/             # Topic pages
-│   └── posts/              # Posts assigned to topics
+│   ├── volumes/            # Top-level volume pages
+│   ├── chapters/           # Chapters assigned to volumes
+│   └── cards/              # Cards assigned to chapters
 ├── assets/images/          # Images and PagesCMS uploads
-├── layouts/                # Topic/post templates and image layouts
+├── layouts/                # Volume/chapter/card templates and image layouts
 ├── static/js/              # Image grouping behavior
 ├── .pages.yml              # PagesCMS collections and fields
 ├── themes/
@@ -67,7 +67,7 @@ hugo version
 1. Go to https://pagescms.org
 2. Create a new project and connect your GitHub repository
 3. Follow PagesCMS authentication flow
-4. The `.pages.yml` file in the repository root defines the Topics, Topic Posts, and Home Page collections.
+4. The `.pages.yml` file in the repository root defines the Volumes, Chapters, Cards, and Home Page collections.
 
 ## Content Management
 
@@ -76,20 +76,19 @@ hugo version
 Edit markdown files directly:
 
 ```bash
-# Create a topic landing page
-nano content/topics/my-topic.md
+# Create a chapter page
+nano content/chapters/my-chapter.md
 
-# Create a post assigned to a topic
-nano content/posts/my-post.md
+# Create a card assigned to a chapter
+nano content/cards/my-card.md
 ```
 
 ### PagesCMS UI
 
 1. Log in to the PagesCMS dashboard.
-2. Use **Categories** for top-level navigation entries. Categories have a banner and can reference zero or more Topics.
-3. Use **Topics** to add topic content, select the Category it belongs to, and set how many Topic Posts to show.
-4. Use **Topic Posts** to add content to a Topic. A post title is optional.
-4. Add ordered text and image blocks. Use one caption field for an image's caption and description; consecutive images without a caption display in a compact horizontal gallery.
+2. Use **Volumes** for top-level navigation entries. Each volume can have a banner and an ordered list of chapters.
+3. Use **Chapters** to add chapter content, select its volume, and set the ordered cards to display.
+4. Use **Cards** to add content to a chapter. Cards have a title, body, optional title hiding, and an ordered list of images with optional captions.
 5. Publish the change; PagesCMS commits it to Git.
 
 ## Development
@@ -105,7 +104,7 @@ hugo server -D --baseURL http://localhost:1313/
 # Visit http://localhost:1313/
 ```
 
-The `-D` flag shows draft topics and posts. Remove it in production builds.
+The `-D` flag shows draft volumes, chapters, and cards. Remove it in production builds.
 
 ### Building
 
@@ -137,17 +136,17 @@ rm -rf public/
 
 The homepage is `content/_index.md` and is editable as the **Home Page** file in PagesCMS.
 
-### Categories
+### Volumes
 
-Categories live in `content/categories/` and represent top-level navigation. Each Category can have a banner, navigation weight, and a list of related Topics. Category pages render topic navigation as anchor links to each Topic further down the page.
+Volumes live in `content/volumes/` and represent top-level navigation. Each volume can have a banner, navigation weight, and an ordered list of chapters. Volume pages render chapter navigation as anchor links to each chapter further down the page.
 
-### Topics
+### Chapters
 
-Topics live in `content/topics/`. A Topic belongs to one Category via the `category` field and has a `post_limit` that controls how many Topic Posts appear on its Category and standalone Topic page. Topics do not have banners, menu entries, or nested Topics.
+Chapters live in `content/chapters/`. Each chapter belongs to one volume via the `volume` field and has an ordered `cards` reference list. The optional `card_limit` controls how many cards appear on its volume and standalone chapter pages. A volume's `chapters` list determines which chapters appear and in what order.
 
-### Topic Posts
+### Cards
 
-Posts live in `content/posts/` and use a `topic` reference to associate them with a topic page. Use the post body for prose and ordered content blocks to interleave text and images. Image blocks support a single caption/description field; images are emitted without alt text.
+Cards live in `content/cards/` and use a `chapter` reference to associate them with a chapter. Add each card to that chapter's `cards` list as well; the list determines inclusion and display order. Use the card body for prose and the `images` list for images with optional captions. Cards with zero or one image use a one-third-width column; cards with multiple images use a full-width horizontal image strip followed by the title and body. Set `hide_title: true` to omit a card's title from its display.
 
 ## Configuration
 
@@ -219,23 +218,22 @@ Edit `.pages.yml` to:
 
 ### Front Matter Format
 
-Topic posts use YAML front matter and ordered content blocks:
+Cards use YAML front matter and an ordered list of image objects:
 
 ```yaml
 ---
-title: "Post title"
-topic: topics/sport.md
-date: 2026-01-10
+title: "Card title"
+chapter: content/chapters/sport.md
 draft: false
-blocks:
-  - text: "Text that appears before the image."
+hide_title: false
+images:
   - image: images/sport/example.jpg
-    alt: "Description of the image"
     caption: "Optional caption"
 ---
+Card body text goes here.
 ```
 
-Use text blocks for prose and image blocks for photos. The optional caption field can include both an image caption and description; adjacent images without a caption display in a compact gallery, while captioned images display in columns.
+Cards do not need a date. The chapter's ordered card references control their position.
 
 ### Draft vs Published
 

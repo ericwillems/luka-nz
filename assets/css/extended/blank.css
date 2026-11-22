@@ -254,7 +254,7 @@
 }
 
 .topic-introduction,
-.post-content-blocks {
+.post-content {
   min-width: 0;
 }
 
@@ -290,24 +290,86 @@
 }
 
 .topic-posts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(1rem, 2vw, 1.5rem);
   margin-top: 0;
 }
 
 .topic-post {
-  margin: 2rem 0;
-  padding-top: 1rem;
+  min-width: 0;
+  margin: 0;
 }
 
 .topic-post + .topic-post {
-  border-top: 1px solid var(--border);
+  border-top: 0;
+}
+
+.topic-post--gallery {
+  grid-column: 1 / -1;
+}
+
+.post-single.topic-post-single {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.post-single.topic-post-single > .post-header,
+.post-single.topic-post-single > .topic-post--gallery {
+  grid-column: 1 / -1;
 }
 
 .topic-posts-separator {
   margin: 2rem 0;
 }
 
-.topic-post h3 {
-  margin-bottom: 0.25rem;
+.card-image-strip {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+}
+
+.topic-post--column .card-image-strip {
+  display: block;
+}
+
+.card-image {
+  flex: 0 0 min(78vw, 22rem);
+  min-width: 0;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.topic-post--column .card-image {
+  width: 100%;
+}
+
+.card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.card-image figcaption {
+  margin-top: 0.5rem;
+  color: var(--secondary);
+  font-size: 0.9em;
+}
+
+.card-title {
+  margin: 0 0 0.5rem;
+}
+
+.card-title a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .image-block {
@@ -352,4 +414,22 @@
 
 .topic-image-gallery--columns .image-block {
   margin: 0;
+}
+
+@media (max-width: 760px) {
+  .topic-posts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .topic-post--gallery {
+    grid-column: auto;
+  }
+
+  .post-single.topic-post-single {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .post-single.topic-post-single > .post-header {
+    grid-column: auto;
+  }
 }

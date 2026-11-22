@@ -1,0 +1,40 @@
+{{- define "main" }}
+<article class="category-page">
+  {{- $dominantColor := "" -}}
+  <header class="category-hero">
+    {{- with .Params.cover.image }}
+      {{- $src := partial "image-src.html" . }}
+      {{- $dominantColor = partial "hero-dominant-color.html" . }}
+    <img class="category-hero-image" src="{{ $src }}" alt="" loading="eager">
+    {{- end }}
+    <div class="category-hero-content"{{ with $dominantColor }} style="--hero-color: {{ . }};"{{ end }}>
+      <h1>{{ .Title }}</h1>
+    </div>
+  </header>
+
+  {{- with .Content }}
+  <div class="topic-introduction md-content">{{ . }}</div>
+  {{- end }}
+
+  {{- with .Params.chapters }}
+  <section class="category-related-topics">
+    {{- range . }}
+      {{- $slug := partial "content-ref.html" . }}
+      {{- with site.GetPage (printf "chapters/%s.md" $slug) }}
+        {{- if not .Draft }}
+    <article class="category-related-topic" id="{{ $slug }}">
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      {{- with .Content }}<div class="topic-introduction md-content">{{ . }}</div>{{ end }}
+      {{- $limit := 3 -}}
+      {{- if isset .Params "card_limit" -}}
+        {{- $limit = .Params.card_limit -}}
+      {{- end -}}
+      {{- partial "chapter-cards.html" (dict "Page" . "Limit" $limit) }}
+    </article>
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  </section>
+  {{- end }}
+</article>
+{{- end }}

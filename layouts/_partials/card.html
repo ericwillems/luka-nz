@@ -1,0 +1,53 @@
+{{- $card := .Page -}}
+{{- $heading := .Heading | default "h3" -}}
+{{- $linked := .Linked -}}
+{{- $extraClass := .Class -}}
+{{- $images := $card.Params.images -}}
+{{- $isGallery := gt (len $images) 1 -}}
+{{- $className := "topic-post card-entry" -}}
+{{- if $isGallery -}}
+  {{- $className = printf "%s topic-post--gallery" $className -}}
+{{- else -}}
+  {{- $className = printf "%s topic-post--column" $className -}}
+{{- end -}}
+{{- with $extraClass -}}
+  {{- $className = printf "%s %s" $className . -}}
+{{- end }}
+<article class="{{ $className }}">
+  {{- with $images }}
+  <div class="card-image-strip">
+    {{- range . }}
+      {{- $image := . -}}
+      {{- with .image }}
+        {{- $src := partial "image-src.html" . }}
+    <figure class="card-image">
+      <img src="{{ $src }}" alt="" loading="lazy">
+      {{- with $image.caption }}
+      <figcaption>{{ . | markdownify }}</figcaption>
+      {{- end }}
+    </figure>
+      {{- end }}
+    {{- end }}
+  </div>
+  {{- end }}
+  <div class="card-copy">
+    {{- if and (not $card.Params.hide_title) $card.Title }}
+      {{- if eq $heading "h1" }}
+        {{- if $linked }}
+    <h1 class="card-title"><a href="{{ $card.RelPermalink }}">{{ $card.Title }}</a></h1>
+        {{- else }}
+    <h1 class="card-title">{{ $card.Title }}</h1>
+        {{- end }}
+      {{- else }}
+        {{- if $linked }}
+    <h3 class="card-title"><a href="{{ $card.RelPermalink }}">{{ $card.Title }}</a></h3>
+        {{- else }}
+    <h3 class="card-title">{{ $card.Title }}</h3>
+        {{- end }}
+      {{- end }}
+    {{- end }}
+    {{- with $card.Content }}
+    <div class="post-content md-content">{{ . }}</div>
+    {{- end }}
+  </div>
+</article>
