@@ -3,6 +3,7 @@ title: Some of my other awards and achievements
 draft: false
 chapter: content/chapters/awards.md
 hide_title: false
+order: 1
 ---
 ## 2024
 
