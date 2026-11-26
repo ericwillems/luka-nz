@@ -3,7 +3,7 @@ title: Hotel Elms - Papanui
 draft: false
 chapter: content/chapters/work-experience.md
 hide_title: false
-order: 1
+order: 3
 ---
 # 2022 - 2023
 

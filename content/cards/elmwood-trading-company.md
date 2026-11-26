@@ -2,10 +2,10 @@
 title: Elmwood Trading Company
 draft: false
 chapter: content/chapters/work-experience.md
-order: 3
+order: 1
 hide_title: false
 images:
-  - /images/work-experience/work-experience-01.jpg
+  - "/images/work-experience/work-experience-01.jpg"
 ---
 # 2025 -
 
