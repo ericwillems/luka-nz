@@ -127,6 +127,7 @@
 .menu .category-menu-active::before {
   inset: 0 -10px auto;
   height: 10px;
+  border-radius: 0;
 }
 
 .category-topic-navigation::before,
