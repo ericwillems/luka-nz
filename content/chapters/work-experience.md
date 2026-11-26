@@ -4,6 +4,8 @@ url: "/work-experience/"
 volume: content/volumes/about.md
 draft: false
 order: 2
+cards:
+  - content/cards/elmwood-trading-company.md
 ---
 ## Elmwood Trading Company
 
