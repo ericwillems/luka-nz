@@ -20,17 +20,18 @@
 {{- if and (not $isFullPage) (gt (len $contentWords) $maxWords) -}}
   {{- $summaryWords := 0 -}}
   {{- $summaryFinished := false -}}
-  {{- range (findRE `[^.!?]+[.!?]+["'’”)]*|[^.!?]+$` $plainContent) -}}
-    {{- $sentence := strings.TrimSpace . -}}
-    {{- $sentenceWords := len (findRE `\S+` $sentence) -}}
+  {{- range (findRE `[^.!?]+[.!?]+[*_~"'’”)]*|[^.!?]+$` (strings.TrimSpace $card.RawContent)) -}}
+    {{- $sentence := . -}}
+    {{- $sentenceWords := len (findRE `\S+` (markdownify $sentence | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace)) -}}
     {{- if and (not $summaryFinished) (or (le (add $summaryWords $sentenceWords) $maxWords) (eq $summaryWords 0)) -}}
-      {{- $summary = strings.TrimSpace (printf "%s %s" $summary $sentence) -}}
+      {{- $summary = printf "%s%s" $summary $sentence -}}
       {{- $summaryWords = add $summaryWords $sentenceWords -}}
     {{- else -}}
       {{- $summaryFinished = true -}}
     {{- end -}}
   {{- end -}}
-  {{- $isTruncated = and (ne $summary "") (ne $summary $plainContent) -}}
+  {{- $summaryPlain := $summary | markdownify | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace -}}
+  {{- $isTruncated = and (ne $summaryPlain "") (ne $summaryPlain $plainContent) -}}
 {{- end -}}
 {{- $className := "topic-post card-entry" -}}
 {{- if $isCollage -}}
@@ -66,7 +67,8 @@
   {{- with $card.Content }}
     {{- if $isTruncated }}
     <div class="post-content md-content">
-      <p>{{ $summary }} <a class="card-read-more" href="{{ $card.RelPermalink }}" aria-label="Read more about {{ $card.Title }}">Read more</a></p>
+      {{- $summary | markdownify }}
+      <p><a class="card-read-more" href="{{ $card.RelPermalink }}" aria-label="Read more about {{ $card.Title }}">Read more</a></p>
     </div>
     {{- else }}
     <div class="post-content md-content">{{ . }}</div>
