@@ -3,7 +3,10 @@
 {{- $extraClass := .Class -}}
 {{- $isFullPage := eq $extraClass "card-single" -}}
 {{- $images := $card.Params.images -}}
-{{- $isCollage := gt (len $images) 1 -}}
+{{- $isCollage := false -}}
+{{- with $images -}}
+  {{- $isCollage = gt (len .) 1 -}}
+{{- end -}}
 {{- $plainContent := $card.Content | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace -}}
 {{- $contentWords := findRE `\S+` $plainContent -}}
 {{- $isTruncated := false -}}
