@@ -4,6 +4,8 @@ url: "/awards/"
 volume: content/volumes/about.md
 draft: false
 order: 3
+cards:
+  - content/cards/national-achievement-award-nov-2024-government-house.md
 ---
 ## National Acheivement Award Nov 2024 - Government House
 

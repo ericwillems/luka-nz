@@ -4,11 +4,12 @@ draft: false
 chapter: content/chapters/awards.md
 hide_title: false
 images:
-  - /images/awards/awards-01.jpg
-  - /images/awards/awards-02.jpg
-  - /images/awards/awards-03.jpg
-  - /images/awards/awards-04.jpg
-  - /images/awards/awards-05.jpg
+  - "/images/awards/awards-01.jpg"
+  - "/images/awards/awards-02.jpg"
+  - "/images/awards/awards-03.jpg"
+  - "/images/awards/awards-04.jpg"
+  - "/images/awards/awards-05.jpg"
+order: 1
 ---
 Luka Willems has had a stella 2024. He will be receiving a New Zealand Down Syndrome Association (NZDSA), 2024 National Achievement Award at Government House in Wellington this Nov 14th. The award will be presented by the Rt Hon.Dame Cindy Kiro and Dr Richard Davies at a special High Tea.
 
