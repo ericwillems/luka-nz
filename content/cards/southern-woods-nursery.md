@@ -2,10 +2,10 @@
 title: Southern Woods Nursery
 draft: false
 chapter: content/chapters/work-experience.md
-order: 2
+order: 3
 hide_title: false
 images:
-  - /images/work-experience/work-experience-02.jpg
+  - "/images/work-experience/work-experience-02.jpg"
 ---
 # 2022
 
