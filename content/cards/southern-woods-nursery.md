@@ -4,7 +4,8 @@ draft: false
 chapter: content/chapters/work-experience.md
 hide_title: false
 images:
-  - /images/work-experience/work-experience-02.jpg
+  - "/images/work-experience/work-experience-02.jpg"
+order: 1
 ---
 # 2022
 

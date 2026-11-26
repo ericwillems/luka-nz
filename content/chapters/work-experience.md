@@ -5,6 +5,7 @@ volume: content/volumes/about.md
 draft: false
 order: 2
 cards:
+  - content/cards/southern-woods-nursery.md
   - content/cards/elmwood-trading-company.md
 ---
 ## Elmwood Trading Company
