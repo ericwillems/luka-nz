@@ -148,7 +148,7 @@ Chapters live in `content/chapters/`. Each chapter belongs to one volume via the
 
 ### Cards
 
-Cards live in `content/cards/` and use a `chapter` reference to associate them with a chapter. The Cards CMS view is sorted by chapter and displays each card's order within that chapter. Use the card body for prose and the `images` field for multiple images. Cards with zero or one image use a one-third-width column; cards with multiple images use a full-width collage followed by the title and body. Card text over 80 words on volume and chapter pages is previewed to a sentence boundary with a **Read more** link; a card's own page shows its full content at full width. Set `hide_title: true` to omit a card's title from its display.
+Cards live in `content/cards/` and use a `chapter` reference to associate them with a chapter. The Cards CMS view is sorted by chapter and displays each card's order within that chapter. Use the card body for prose and the `images` field for multiple images. Cards without images use a full-width text layout; cards with one image use a one-third-width column; cards with multiple images use a full-width collage followed by the title and body. Card text over 80 words when images are present, or 160 words without images, is previewed to a sentence boundary with a **Read more** link on volume and chapter pages; a card's own page shows its full content at full width. Set `hide_title: true` to omit a card's title from its display.
 
 ## Configuration
 

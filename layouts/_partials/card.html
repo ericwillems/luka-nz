@@ -3,21 +3,27 @@
 {{- $extraClass := .Class -}}
 {{- $isFullPage := eq $extraClass "card-single" -}}
 {{- $images := $card.Params.images -}}
-{{- $isCollage := false -}}
+{{- $imageCount := 0 -}}
 {{- with $images -}}
-  {{- $isCollage = gt (len .) 1 -}}
+  {{- $imageCount = len . -}}
+{{- end -}}
+{{- $isCollage := false -}}
+{{- $isCollage = gt $imageCount 1 -}}
+{{- $maxWords := 80 -}}
+{{- if eq $imageCount 0 -}}
+  {{- $maxWords = 160 -}}
 {{- end -}}
 {{- $plainContent := $card.Content | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace -}}
 {{- $contentWords := findRE `\S+` $plainContent -}}
 {{- $isTruncated := false -}}
 {{- $summary := "" -}}
-{{- if and (not $isFullPage) (gt (len $contentWords) 80) -}}
+{{- if and (not $isFullPage) (gt (len $contentWords) $maxWords) -}}
   {{- $summaryWords := 0 -}}
   {{- $summaryFinished := false -}}
   {{- range (findRE `[^.!?]+[.!?]+["'’”)]*|[^.!?]+$` $plainContent) -}}
     {{- $sentence := strings.TrimSpace . -}}
     {{- $sentenceWords := len (findRE `\S+` $sentence) -}}
-    {{- if and (not $summaryFinished) (or (le (add $summaryWords $sentenceWords) 80) (eq $summaryWords 0)) -}}
+    {{- if and (not $summaryFinished) (or (le (add $summaryWords $sentenceWords) $maxWords) (eq $summaryWords 0)) -}}
       {{- $summary = strings.TrimSpace (printf "%s %s" $summary $sentence) -}}
       {{- $summaryWords = add $summaryWords $sentenceWords -}}
     {{- else -}}
@@ -29,6 +35,8 @@
 {{- $className := "topic-post card-entry" -}}
 {{- if $isCollage -}}
   {{- $className = printf "%s topic-post--collage" $className -}}
+{{- else if eq $imageCount 0 -}}
+  {{- $className = printf "%s topic-post--text-only" $className -}}
 {{- else -}}
   {{- $className = printf "%s topic-post--column" $className -}}
 {{- end -}}
@@ -36,32 +44,32 @@
   {{- $className = printf "%s %s" $className . -}}
 {{- end }}
 <article class="{{ $className }}">
+  {{- if and (not $card.Params.hide_title) $card.Title }}
+    {{- if eq $heading "h1" }}
+  <h1 class="card-title">{{ $card.Title }}</h1>
+    {{- else }}
+  <h3 class="card-title">{{ $card.Title }}</h3>
+    {{- end }}
+  {{- end }}
   {{- with $images }}
   <div class="card-image-collage">
-    {{- range . }}
-      {{- $src := partial "image-src.html" . }}
+    {{- range $index, $image := . }}
+      {{- $src := partial "image-src.html" $image }}
     <figure class="card-image">
-      <img src="{{ $src }}" alt="" loading="lazy">
+      <button class="card-image-trigger" type="button" aria-label="Open image {{ add $index 1 }} of {{ len $images }}: {{ $card.Title }}" data-card-title="{{ $card.Title }}">
+        <img src="{{ $src }}" alt="{{ $card.Title }}" loading="lazy">
+      </button>
     </figure>
     {{- end }}
   </div>
   {{- end }}
-  <div class="card-copy">
-    {{- if and (not $card.Params.hide_title) $card.Title }}
-      {{- if eq $heading "h1" }}
-    <h1 class="card-title">{{ $card.Title }}</h1>
-      {{- else }}
-    <h3 class="card-title">{{ $card.Title }}</h3>
-      {{- end }}
-    {{- end }}
-    {{- with $card.Content }}
-      {{- if $isTruncated }}
+  {{- with $card.Content }}
+    {{- if $isTruncated }}
     <div class="post-content md-content">
       <p>{{ $summary }} <a class="card-read-more" href="{{ $card.RelPermalink }}" aria-label="Read more about {{ $card.Title }}">Read more</a></p>
     </div>
-      {{- else }}
+    {{- else }}
     <div class="post-content md-content">{{ . }}</div>
-      {{- end }}
     {{- end }}
-  </div>
+  {{- end }}
 </article>
