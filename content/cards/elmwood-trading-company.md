@@ -5,7 +5,7 @@ chapter: content/chapters/work-experience.md
 hide_title: false
 images:
   - "/images/work-experience/work-experience-01.jpg"
-order: 2
+order: 3
 ---
 # 2025 - 
  
