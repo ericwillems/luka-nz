@@ -4,6 +4,8 @@ url: "/qualifications/"
 volume: content/volumes/about.md
 draft: false
 order: 1
+cards:
+  - content/cards/ara-hospitality-level-2-and-3-restaurant-and-barista.md
 ---
 I believe in Life-long education AND mainstream education. It ignites my brain
 
